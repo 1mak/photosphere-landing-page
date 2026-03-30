@@ -17,6 +17,56 @@ h1, h2 {
   font-family: 'Chewy', ui-serif, Georgia, serif;
 }
 
+/* ─── Skip to content ───────────────────────────── */
+.skip-to-content {
+  position: fixed;
+  top: -100%;
+  left: 1rem;
+  z-index: 9999;
+  padding: 0.5rem 1rem;
+  background: #6c25a7;
+  color: #fff;
+  font-size: 0.875rem;
+  font-weight: 600;
+  border-radius: 0 0 0.5rem 0.5rem;
+  transition: top 0.2s ease;
+}
+.skip-to-content:focus {
+  top: 0;
+}
+
+/* ─── Scroll progress bar ───────────────────────── */
+#scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 0%;
+  background: linear-gradient(90deg, #6c25a7, #FB7185, #FBBF24);
+  z-index: 9999;
+  transition: width 0.1s linear;
+}
+
+/* ─── Scroll fade-in ─────────────────────────────── */
+.fade-in-section {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.fade-in-section.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fade-in-section {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  #scroll-progress { display: none; }
+}
+
 /* ─── Background orbs ───────────────────────────── */
 .orb {
   position: fixed;
@@ -145,42 +195,53 @@ h1, h2 {
   border: 1px solid rgba(52, 211, 153, 0.28);
 }
 .feature-card-teal:hover { border-color: rgba(52, 211, 153, 0.50); }
-.feature-card-teal h3 { color: #047857; }
+.feature-card-teal h3 { color: #134e3a; }
 
 .feature-card-blue {
   background: rgba(219, 234, 254, 0.48);
   border: 1px solid rgba(96, 165, 250, 0.28);
 }
 .feature-card-blue:hover { border-color: rgba(96, 165, 250, 0.50); }
-.feature-card-blue h3 { color: #1D4ED8; }
+.feature-card-blue h3 { color: #1a2f6e; }
 
 .feature-card-purple {
   background: rgba(237, 233, 254, 0.48);
   border: 1px solid rgba(167, 139, 250, 0.28);
 }
 .feature-card-purple:hover { border-color: rgba(167, 139, 250, 0.50); }
-.feature-card-purple h3 { color: #6D28D9; }
+.feature-card-purple h3 { color: #2e1a6e; }
 
 .feature-card-rose {
   background: rgba(254, 226, 226, 0.48);
   border: 1px solid rgba(252, 165, 165, 0.28);
 }
 .feature-card-rose:hover { border-color: rgba(252, 165, 165, 0.50); }
-.feature-card-rose h3 { color: #BE123C; }
+.feature-card-rose h3 { color: #5a1a2a; }
 
 .feature-card-amber {
   background: rgba(254, 243, 199, 0.48);
   border: 1px solid rgba(251, 191, 36, 0.28);
 }
 .feature-card-amber:hover { border-color: rgba(251, 191, 36, 0.50); }
-.feature-card-amber h3 { color: #B45309; }
+.feature-card-amber h3 { color: #4a2e08; }
 
 .feature-card-sky {
   background: rgba(224, 242, 254, 0.48);
   border: 1px solid rgba(14, 165, 233, 0.28);
 }
 .feature-card-sky:hover { border-color: rgba(14, 165, 233, 0.50); }
-.feature-card-sky h3 { color: #0369A1; }
+.feature-card-sky h3 { color: #0c2d4a; }
+
+/* feature card headings — Inter for a grounded, professional feel */
+.feature-card-teal h3,
+.feature-card-blue h3,
+.feature-card-purple h3,
+.feature-card-rose h3,
+.feature-card-amber h3,
+.feature-card-sky h3 {
+  font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  font-weight: 600;
+}
 
 /* shared for feature cards */
 .feature-card-teal,

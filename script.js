@@ -1,12 +1,53 @@
-// Nav shadow on scroll
+// Nav shadow on scroll + scroll progress bar
 const nav = document.getElementById('nav');
+const scrollProgress = document.getElementById('scroll-progress');
 window.addEventListener('scroll', () => {
   if (window.scrollY > 8) {
     nav.classList.add('scrolled');
   } else {
     nav.classList.remove('scrolled');
   }
-});
+
+  // Progress bar
+  if (scrollProgress) {
+    const scrolled = window.scrollY;
+    const total = document.documentElement.scrollHeight - window.innerHeight;
+    scrollProgress.style.width = (scrolled / total * 100) + '%';
+  }
+}, { passive: true });
+
+// ─── Scroll fade-in sections ──────────────────────────────────────────────────
+const fadeObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('is-visible');
+      fadeObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.08 });
+
+document.querySelectorAll('.fade-in-section').forEach(el => fadeObserver.observe(el));
+
+// ─── Copy button ──────────────────────────────────────────────────────────────
+const copyBtn   = document.getElementById('copy-btn');
+const copyLabel = document.getElementById('copy-label');
+if (copyBtn) {
+  const commands = `git clone https://github.com/ashleydavis/photosphere\ncd photosphere\nbun install\nbun run dev`;
+  copyBtn.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(commands);
+      copyLabel.textContent = 'Copied!';
+      copyBtn.querySelector('svg').style.display = 'none';
+      setTimeout(() => {
+        copyLabel.textContent = 'Copy';
+        copyBtn.querySelector('svg').style.display = '';
+      }, 2000);
+    } catch {
+      copyLabel.textContent = 'Failed';
+      setTimeout(() => { copyLabel.textContent = 'Copy'; }, 2000);
+    }
+  });
+}
 
 // Mobile menu toggle
 const menuBtn = document.getElementById('menu-btn');

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Barriecito:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Chewy:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap');
 
 /* ─── Base ──────────────────────────────────────── */
 html {
@@ -14,7 +14,7 @@ body {
 
 /* ─── Typography ────────────────────────────────── */
 h1, h2 {
-  font-family: 'Barriecito', ui-serif, Georgia, serif;
+  font-family: 'Chewy', ui-serif, Georgia, serif;
 }
 
 /* ─── Background orbs ───────────────────────────── */

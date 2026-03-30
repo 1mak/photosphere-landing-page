@@ -266,9 +266,9 @@ const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
       navLinks.forEach(link => {
-        link.classList.remove('text-[#4285F4]', 'font-semibold');
+        link.classList.remove('text-ink', 'font-semibold');
         if (link.getAttribute('href') === `#${entry.target.id}`) {
-          link.classList.add('text-[#4285F4]', 'font-semibold');
+          link.classList.add('text-ink', 'font-semibold');
         }
       });
     }

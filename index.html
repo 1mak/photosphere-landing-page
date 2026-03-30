@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Primary SEO -->
+  <title>Photosphere — Local-First Photo Management</title>
+  <meta name="description" content="Photosphere is a free, open-source photo viewer and manager. Like Google Photos — but your photos stay on your device. Private, fast, and fully yours." />
+  <meta name="keywords" content="photo viewer app, Google Photos alternative, local photo management, open source photo app, Picasa successor, self-hosted photo manager, photo organizer" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Photosphere — Local-First Photo Management" />
+  <meta property="og:description" content="Free, open-source photo management. Like Google Photos, but your photos stay on your device." />
+  <meta property="og:url" content="https://1mak.github.io/photosphere-landing-page/" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Photosphere — Local-First Photo Management" />
+  <meta name="twitter:description" content="Free, open-source photo management. Like Google Photos, but your photos stay on your device." />
+
+  <!-- JSON-LD Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Photosphere",
+    "description": "A free, open-source, local-first photo viewer and manager.",
+    "applicationCategory": "MultimediaApplication",
+    "operatingSystem": "Windows, macOS, Linux, iOS, Android",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "url": "https://github.com/ashleydavis/photosphere",
+    "license": "https://opensource.org/licenses/MIT"
+  }
+  </script>
+
+  <!-- Tailwind Play CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'page':     '#F4F6FF',
+            'ink':      '#1C1E2E',
+            'ink-2':    '#1F2937',
+            'ink-3':    '#4B5563',
+            'ink-4':    '#6B7280',
+            'accent-indigo': '#818CF8',
+            'accent-purple': '#C084FC',
+            'accent-sky':    '#38BDF8',
+            'accent-teal':   '#34D399',
+            'accent-rose':   '#FB7185',
+            'accent-amber':  '#FBBF24',
+          },
+          fontFamily: {
+            sans:  ['"Inter"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+            serif: ['"Playfair Display"', 'ui-serif', 'Georgia', 'serif'],
+          },
+        }
+      }
+    }
+  </script>
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body class="bg-page min-h-screen relative">
+
+  <!-- ═══════════════════════════════════════════════
+       BACKGROUND ORBS — soft pastel ambient light
+  ════════════════════════════════════════════════ -->
+  <div aria-hidden="true" class="pointer-events-none select-none">
+    <!-- Periwinkle — top left -->
+    <div class="orb w-[640px] h-[640px] opacity-70"
+         style="background:#C7D2FE; top:-160px; left:-160px;"></div>
+    <!-- Lavender — top right -->
+    <div class="orb w-[560px] h-[560px] opacity-65"
+         style="background:#E9D5FF; top:-100px; right:-120px;"></div>
+    <!-- Mint — mid left -->
+    <div class="orb w-[440px] h-[440px] opacity-55"
+         style="background:#A7F3D0; top:52vh; left:-60px;"></div>
+    <!-- Rose — lower right -->
+    <div class="orb w-[500px] h-[500px] opacity-55"
+         style="background:#FECDD3; bottom:8vh; right:-80px;"></div>
+    <!-- Sky — bottom center -->
+    <div class="orb w-[420px] h-[420px] opacity-45"
+         style="background:#BAE6FD; bottom:-80px; left:35%;"></div>
+    <!-- Warm cream — mid right -->
+    <div class="orb w-[340px] h-[340px] opacity-40"
+         style="background:#FEF3C7; top:38vh; right:5%;"></div>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════════
+       NAV
+  ════════════════════════════════════════════════ -->
+  <header id="nav" class="fixed top-0 left-0 right-0 z-50">
+    <nav class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between"
+         aria-label="Main navigation">
+
+      <!-- Logo -->
+      <a href="#" class="flex items-center gap-2.5 group" aria-label="Photosphere home">
+        <svg width="34" height="34" viewBox="0 0 36 36" fill="none"
+             xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="18" cy="18" r="17" fill="rgba(255,255,255,0.70)"
+                  stroke="rgba(255,255,255,0.90)" stroke-width="1"/>
+          <path d="M18 1C9.6 1 2.7 7.2 1.2 15.3L18 18Z" fill="#818CF8"/>
+          <path d="M1.2 15.3C1.1 16.2 1 17.1 1 18C1 22.4 2.7 26.4 5.5 29.4L18 18Z" fill="#34D399"/>
+          <path d="M5.5 29.4C8.5 32.7 12.9 35 18 35C26.1 35 32.8 29.3 34.6 21.7L18 18Z" fill="#FB7185"/>
+          <path d="M34.6 21.7C34.9 20.5 35 19.3 35 18C35 9.2 28.5 2 18 1L18 18Z" fill="#FBBF24"/>
+          <circle cx="18" cy="18" r="6" fill="rgba(244,246,255,0.90)"/>
+        </svg>
+        <span class="text-xl font-bold text-ink tracking-tight">Photosphere</span>
+      </a>
+
+      <!-- Desktop links -->
+      <div class="hidden md:flex items-center gap-8">
+        <a href="#features"     class="nav-link text-sm font-medium text-ink-3 hover:text-ink transition-colors">Features</a>
+        <a href="#how-it-works" class="nav-link text-sm font-medium text-ink-3 hover:text-ink transition-colors">How it works</a>
+        <a href="#platforms"    class="nav-link text-sm font-medium text-ink-3 hover:text-ink transition-colors">Platforms</a>
+        <a href="https://github.com/ashleydavis/photosphere"
+           target="_blank" rel="noopener noreferrer"
+           class="flex items-center gap-1.5 text-sm font-medium text-ink-3 hover:text-ink transition-colors">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+          </svg>
+          GitHub
+        </a>
+        <a href="https://github.com/ashleydavis/photosphere"
+           target="_blank" rel="noopener noreferrer"
+           class="btn-primary text-sm font-semibold px-5 py-2 rounded-full">
+          Get Started
+        </a>
+      </div>
+
+      <!-- Mobile menu button -->
+      <button id="menu-btn" aria-label="Open menu" aria-expanded="false"
+              class="md:hidden p-2 rounded-lg text-ink-3 hover:text-ink transition-colors">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+             stroke-width="2" stroke-linecap="round">
+          <line x1="3" y1="6"  x2="21" y2="6"/>
+          <line x1="3" y1="12" x2="21" y2="12"/>
+          <line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
+    </nav>
+
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="md:hidden px-6 pb-5">
+      <div class="flex flex-col gap-4 pt-4">
+        <a href="#features"     class="text-sm font-medium text-ink-3 hover:text-ink">Features</a>
+        <a href="#how-it-works" class="text-sm font-medium text-ink-3 hover:text-ink">How it works</a>
+        <a href="#platforms"    class="text-sm font-medium text-ink-3 hover:text-ink">Platforms</a>
+        <a href="https://github.com/ashleydavis/photosphere"
+           target="_blank" rel="noopener noreferrer"
+           class="text-sm font-medium text-ink-3 hover:text-ink">GitHub</a>
+        <a href="https://github.com/ashleydavis/photosphere"
+           target="_blank" rel="noopener noreferrer"
+           class="btn-primary text-sm font-semibold px-5 py-3 rounded-full text-center">
+          Get Started
+        </a>
+      </div>
+    </div>
+  </header>
+
+
+  <main class="relative z-10">
+
+    <!-- ═══════════════════════════════════════════════
+         HERO — split layout
+    ════════════════════════════════════════════════ -->
+    <section id="hero" class="pt-32 pb-20 px-6 overflow-hidden section-white">
+      <div class="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-10 lg:gap-4">
+
+        <!-- ── LEFT: Photo sphere ── -->
+        <div class="flex-shrink-0 flex items-center justify-center w-full lg:w-1/2">
+          <div class="photo-sphere-scene" aria-hidden="true">
+            <div class="photo-sphere-grid">
+
+              <!-- Row 1 -->
+              <img class="sph" src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=176&h=176&fit=crop&auto=format&q=80" alt="" />
+              <img class="sph" src="https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?w=176&h=176&fit=crop&auto=format&q=80" alt="" />
+              <img class="sph" src="https://images.unsplash.com/photo-1501854140801-50d01698950b?w=176&h=176&fit=crop&auto=format&q=80" alt="" />
+              <img class="sph" src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=176&h=176&fit=crop&auto=format&q=80" alt="" />
+              <img class="sph" src="https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=176&h=176&fit=crop&auto=format&q=80" alt="" />
+
+              <!-- Row 2 -->
+              <img class="sph" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=176&h=176&fit=crop&auto=format&q=80" alt="" />
+              <img class="sph" src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=176&h=176&fit=crop&auto=format&q=80" alt="" />
+              <img class="sph" src="https://images.unsplash.com/photo-1519741497674-611481863552?w=176&h=176&fit=crop&auto=format&q=80" alt="" />
+              <img class="sph" src="https://images.unsplash.com/photo-1474511320723-9a56873867b5?w=176&h=176&fit=crop&auto=format&q=80" alt="" />
+              <img class="sph" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=176&h=176&fit=crop&auto=format&q=80" alt="" />
+
+              <!-- Row 3 (center — most visible) -->
+              <img class="sph" src="https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?w=176&h=176&fit=crop&auto=format&q=80" alt="" />
+              <img class="sph" src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=176&h=176&fit=crop&auto=format&q=80" alt="" />
+              <img class="sph" src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=176&h=176&fit=crop&auto=format&q=80" alt="" />
+              <img class="sph" src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?w=176&h=176&fit=crop&auto=format&q=80" alt="" />
+              <img class="sph" src="https://images.unsplash.com/photo-1531306728370-e2ebd9d7bb99?w=176&h=176&fit=crop&auto=format&q=80" alt="" />
+
+              <!-- Row 4 -->
+              <img class="sph" src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=176&h=176&fit=crop&auto=format&q=80" alt="" />
+              <img class="sph" src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=176&h=176&fit=crop&auto=format&q=80" alt="" />
+              <img class="sph" src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=176&h=176&fit=crop&auto=format&q=80" alt="" />
+              <img class="sph" src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=176&h=176&fit=crop&auto=format&q=80" alt="" />
+              <img class="sph" src="https://images.unsplash.com/photo-1524863479829-916d8e77f114?w=176&h=176&fit=crop&auto=format&q=80" alt="" loading="lazy" />
+
+              <!-- Row 5 -->
+              <img class="sph" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=176&h=176&fit=crop&auto=format&q=80" alt="" loading="lazy" />
+              <img class="sph" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=176&h=176&fit=crop&auto=format&q=80" alt="" loading="lazy" />
+              <img class="sph" src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=176&h=176&fit=crop&auto=format&q=80" alt="" loading="lazy" />
+              <img class="sph" src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=176&h=176&fit=crop&auto=format&q=80" alt="" loading="lazy" />
+              <img class="sph" src="https://images.unsplash.com/photo-1504700610630-ac6aba3536d3?w=176&h=176&fit=crop&auto=format&q=80" alt="" loading="lazy" />
+
+            </div>
+          </div>
+        </div>
+
+        <!-- ── RIGHT: Hero text ── -->
+        <div class="flex-1 flex flex-col items-center lg:items-start text-center lg:text-left lg:pl-8">
+
+          <!-- Eyebrow chip -->
+          <div class="chip inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-sm font-medium text-ink-2 mb-7">
+            <span class="w-2 h-2 rounded-full bg-accent-teal animate-pulse"></span>
+            Free &amp; open source — v0.0.7 available now
+          </div>
+
+          <!-- Headline -->
+          <h1 class="text-5xl sm:text-6xl xl:text-7xl font-extrabold text-ink leading-tight mb-5">
+            Your photos.<br />
+            <span class="text-gradient">Under your<br class="hidden sm:inline" /> control.</span>
+          </h1>
+
+          <!-- Subheadline -->
+          <p class="text-lg sm:text-xl text-ink-3 font-medium leading-relaxed max-w-lg mb-9">
+            The photo management app you always wanted —
+            like Google Photos, but your library
+            <em class="not-italic font-semibold text-ink">never leaves your device</em>.
+            Free, private, and open source.
+          </p>
+
+          <!-- CTA buttons -->
+          <div class="flex flex-col sm:flex-row items-center lg:items-start justify-center lg:justify-start gap-4 mb-10">
+            <a href="https://github.com/ashleydavis/photosphere"
+               target="_blank" rel="noopener noreferrer"
+               class="btn-primary font-semibold text-base px-7 py-3.5 rounded-full flex items-center gap-2.5">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+              </svg>
+              Get Started on GitHub
+            </a>
+            <a href="#features"
+               class="btn-secondary font-semibold text-base px-7 py-3.5 rounded-full flex items-center gap-2">
+              Learn more
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                   stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </a>
+          </div>
+
+          <!-- Platform chips -->
+          <div class="flex flex-wrap items-center justify-center lg:justify-start gap-2.5">
+            <span class="chip flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-medium text-ink-2">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none"
+                   stroke="#34D399" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+              CLI — Available Now
+            </span>
+            <span class="chip flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-medium text-ink-3">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none"
+                   stroke="#FBBF24" stroke-width="2.5" stroke-linecap="round">
+                <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+              </svg>
+              Desktop — Coming Soon
+            </span>
+            <span class="chip flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-medium text-ink-3">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none"
+                   stroke="#FBBF24" stroke-width="2.5" stroke-linecap="round">
+                <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+              </svg>
+              iOS &amp; Android — Coming Soon
+            </span>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════════════
+         FEATURES
+    ════════════════════════════════════════════════ -->
+    <section id="features" class="py-24 px-6 section-alt">
+      <div class="max-w-6xl mx-auto">
+
+        <div class="text-center mb-16">
+          <h2 class="text-4xl sm:text-5xl font-extrabold text-ink mb-4">
+            Built different.<br />
+            <span class="text-gradient">Designed for you.</span>
+          </h2>
+          <p class="text-xl text-ink-3 max-w-xl mx-auto">
+            Everything a modern photo manager should be — with none of the surveillance.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+
+          <!-- Local-first -->
+          <article class="feature-card-teal rounded-2xl p-8">
+            <div class="icon-ring w-14 h-14 rounded-2xl bg-white/60 flex items-center justify-center mb-6">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none"
+                   stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-ink mb-3">Local-first &amp; private</h3>
+            <p class="text-ink-3 leading-relaxed text-sm">
+              Your photos never leave your device. No cloud uploads, no tracking, no subscriptions. Full data sovereignty — always.
+            </p>
+            <div class="mt-6 w-8 h-0.5 rounded-full bg-accent-teal/50"></div>
+          </article>
+
+          <!-- Corruption-resistant -->
+          <article class="feature-card-blue rounded-2xl p-8">
+            <div class="icon-ring w-14 h-14 rounded-2xl bg-white/60 flex items-center justify-center mb-6">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none"
+                   stroke="#60A5FA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <ellipse cx="12" cy="5" rx="9" ry="3"/>
+                <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/>
+                <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-ink mb-3">Corruption-resistant</h3>
+            <p class="text-ink-3 leading-relaxed text-sm">
+              Built on a Git-style immutable database with Merkle trees. File integrity detection and automatic repair keep your library safe.
+            </p>
+            <div class="mt-6 w-8 h-0.5 rounded-full bg-blue-400/50"></div>
+          </article>
+
+          <!-- Sync & encrypt -->
+          <article class="feature-card-purple rounded-2xl p-8">
+            <div class="icon-ring w-14 h-14 rounded-2xl bg-white/60 flex items-center justify-center mb-6">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none"
+                   stroke="#A78BFA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="1 4 1 10 7 10"/>
+                <polyline points="23 20 23 14 17 14"/>
+                <path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4-4.64 4.36A9 9 0 0 1 3.51 15"/>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-ink mb-3">Sync &amp; encrypt</h3>
+            <p class="text-ink-3 leading-relaxed text-sm">
+              Bidirectional device synchronization with optional cloud encryption. Back up on your terms — no vendor lock-in.
+            </p>
+            <div class="mt-6 w-8 h-0.5 rounded-full bg-accent-purple/50"></div>
+          </article>
+
+          <!-- Open source -->
+          <article class="feature-card-rose rounded-2xl p-8">
+            <div class="icon-ring w-14 h-14 rounded-2xl bg-white/60 flex items-center justify-center mb-6">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none"
+                   stroke="#F87171" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="16 18 22 12 16 6"/>
+                <polyline points="8 6 2 12 8 18"/>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-ink mb-3">Fully open source</h3>
+            <p class="text-ink-3 leading-relaxed text-sm">
+              MIT licensed and 100% transparent. Inspect every line, contribute features, or fork the project. Built in the open, for everyone.
+            </p>
+            <div class="mt-6 w-8 h-0.5 rounded-full bg-accent-rose/50"></div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════════════
+         HOW IT WORKS
+    ════════════════════════════════════════════════ -->
+    <section id="how-it-works" class="py-24 px-6 section-white">
+      <div class="max-w-5xl mx-auto">
+
+        <div class="text-center mb-16">
+          <h2 class="text-4xl sm:text-5xl font-extrabold text-ink mb-4">
+            Get started in <span class="text-gradient-warm">minutes</span>
+          </h2>
+          <p class="text-xl text-ink-3">No accounts. No setup fee. Just your photos.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+          <!-- Step 1 -->
+          <div class="flex flex-col items-center text-center">
+            <div class="step-circle w-20 h-20 rounded-full bg-indigo-100/80 border border-indigo-200/60
+                        flex items-center justify-center mb-6 text-3xl font-extrabold text-accent-indigo">
+              1
+            </div>
+            <h3 class="text-xl font-bold text-ink mb-3">Clone &amp; install</h3>
+            <p class="text-ink-3 leading-relaxed text-sm">
+              Clone the repo from GitHub and run
+              <code class="bg-white/70 text-ink-2 text-xs font-mono px-2 py-0.5 rounded-md border border-black/08">bun install</code>
+              to set up in seconds.
+            </p>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="flex flex-col items-center text-center">
+            <div class="step-circle w-20 h-20 rounded-full bg-purple-100/80 border border-purple-200/60
+                        flex items-center justify-center mb-6 text-3xl font-extrabold text-accent-purple">
+              2
+            </div>
+            <h3 class="text-xl font-bold text-ink mb-3">Point to your photos</h3>
+            <p class="text-ink-3 leading-relaxed text-sm">
+              Connect your existing photo library. No migration, no reformatting — Photosphere works with your files as they are.
+            </p>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="flex flex-col items-center text-center">
+            <div class="step-circle w-20 h-20 rounded-full bg-emerald-100/80 border border-emerald-200/60
+                        flex items-center justify-center mb-6 text-3xl font-extrabold text-accent-teal">
+              3
+            </div>
+            <h3 class="text-xl font-bold text-ink mb-3">Browse &amp; manage</h3>
+            <p class="text-ink-3 leading-relaxed text-sm">
+              Search, view, organize, and sync your entire photo library. Beautiful, fast, and completely yours.
+            </p>
+          </div>
+
+        </div>
+
+        <!-- Terminal code block — stays dark for contrast -->
+        <div class="mt-16 max-w-lg mx-auto">
+          <div class="code-block rounded-2xl overflow-hidden">
+            <div class="flex items-center gap-1.5 px-5 py-3 border-b border-white/06">
+              <span class="w-3 h-3 rounded-full bg-rose-400/70"></span>
+              <span class="w-3 h-3 rounded-full bg-amber-400/70"></span>
+              <span class="w-3 h-3 rounded-full bg-emerald-400/70"></span>
+              <span class="ml-3 text-xs text-white/30 font-mono">terminal</span>
+            </div>
+            <pre class="px-6 py-5 text-sm font-mono leading-relaxed overflow-x-auto"><code><span class="text-white/30"># Clone the repo</span>
+<span class="text-emerald-400">$</span> <span class="text-white/80">git clone https://github.com/ashleydavis/photosphere</span>
+<span class="text-emerald-400">$</span> <span class="text-white/80">cd photosphere</span>
+
+<span class="text-white/30"># Install &amp; run</span>
+<span class="text-emerald-400">$</span> <span class="text-white/80">bun install</span>
+<span class="text-emerald-400">$</span> <span class="text-white/80">bun run dev</span>
+<span class="text-indigo-300">✓</span> <span class="text-white/55">Photosphere is ready.</span></code></pre>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════════════
+         PLATFORMS
+    ════════════════════════════════════════════════ -->
+    <section id="platforms" class="py-24 px-6 section-alt">
+      <div class="max-w-5xl mx-auto">
+
+        <div class="text-center mb-16">
+          <h2 class="text-4xl sm:text-5xl font-extrabold text-ink mb-4">
+            Available <span class="text-gradient">everywhere</span>
+          </h2>
+          <p class="text-xl text-ink-3">Starting with CLI — desktop and mobile are on the way.</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+
+          <!-- CLI — live -->
+          <div class="glass platform-card-active rounded-2xl p-8 text-center">
+            <div class="icon-ring w-16 h-16 rounded-2xl bg-emerald-50 flex items-center justify-center mx-auto mb-5">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none"
+                   stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="4 17 10 11 4 5"/>
+                <line x1="12" y1="19" x2="20" y2="19"/>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-ink mb-2">CLI Tool</h3>
+            <p class="text-ink-3 text-sm mb-5">Powerful command-line interface for managing and browsing your library.</p>
+            <span class="inline-flex items-center gap-1.5 bg-emerald-50 border border-emerald-200
+                         text-emerald-700 text-sm font-semibold px-4 py-1.5 rounded-full">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                   stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+              Available — v0.0.7
+            </span>
+          </div>
+
+          <!-- Desktop — coming soon -->
+          <div class="glass rounded-2xl p-8 text-center">
+            <div class="icon-ring w-16 h-16 rounded-2xl bg-indigo-50 flex items-center justify-center mx-auto mb-5">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none"
+                   stroke="#818CF8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                <line x1="8" y1="21" x2="16" y2="21"/>
+                <line x1="12" y1="17" x2="12" y2="21"/>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-ink mb-2">Desktop App</h3>
+            <p class="text-ink-3 text-sm mb-5">Native app for Windows, macOS, and Linux — powered by Electron.</p>
+            <span class="inline-flex items-center gap-1.5 bg-amber-50 border border-amber-200
+                         text-amber-700 text-sm font-semibold px-4 py-1.5 rounded-full">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                   stroke-width="2.5" stroke-linecap="round">
+                <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+              </svg>
+              Coming Soon
+            </span>
+          </div>
+
+          <!-- Mobile — coming soon -->
+          <div class="glass rounded-2xl p-8 text-center">
+            <div class="icon-ring w-16 h-16 rounded-2xl bg-rose-50 flex items-center justify-center mx-auto mb-5">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none"
+                   stroke="#FB7185" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
+                <line x1="12" y1="18" x2="12.01" y2="18"/>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-ink mb-2">Mobile</h3>
+            <p class="text-ink-3 text-sm mb-5">iOS and Android apps for managing your photos on the go.</p>
+            <span class="inline-flex items-center gap-1.5 bg-amber-50 border border-amber-200
+                         text-amber-700 text-sm font-semibold px-4 py-1.5 rounded-full">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                   stroke-width="2.5" stroke-linecap="round">
+                <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+              </svg>
+              Coming Soon
+            </span>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════════════
+         OPEN SOURCE CTA
+    ════════════════════════════════════════════════ -->
+    <section id="open-source" class="py-28 px-6 section-white">
+      <div class="max-w-3xl mx-auto text-center">
+
+        <!-- Pastel dot row -->
+        <div class="flex justify-center gap-2 mb-10" aria-hidden="true">
+          <span class="w-2.5 h-2.5 rounded-full bg-accent-indigo/60 inline-block"></span>
+          <span class="w-2.5 h-2.5 rounded-full bg-accent-purple/60 inline-block"></span>
+          <span class="w-2.5 h-2.5 rounded-full bg-accent-rose/60 inline-block"></span>
+          <span class="w-2.5 h-2.5 rounded-full bg-accent-amber/70 inline-block"></span>
+          <span class="w-2.5 h-2.5 rounded-full bg-accent-teal/60 inline-block"></span>
+        </div>
+
+        <h2 class="text-4xl sm:text-5xl font-extrabold text-ink mb-6">
+          Built in the open.<br />
+          <span class="text-gradient">For everyone.</span>
+        </h2>
+
+        <p class="text-xl text-ink-3 leading-relaxed mb-10">
+          Photosphere is MIT licensed. Read the code, report bugs, suggest features, or contribute directly.
+          Your photos deserve software you can trust — and trust requires transparency.
+        </p>
+
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a href="https://github.com/ashleydavis/photosphere"
+             target="_blank" rel="noopener noreferrer"
+             class="btn-primary font-semibold text-lg px-8 py-3.5 rounded-full flex items-center gap-2.5">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+            </svg>
+            View on GitHub
+          </a>
+          <a href="https://github.com/ashleydavis/photosphere/releases"
+             target="_blank" rel="noopener noreferrer"
+             class="btn-secondary font-semibold text-lg px-8 py-3.5 rounded-full flex items-center gap-2">
+            See releases
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- ═══════════════════════════════════════════════
+       FOOTER
+  ════════════════════════════════════════════════ -->
+  <footer class="relative z-10 border-t border-black/06 py-10 px-6 bg-white">
+    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
+
+      <a href="#" class="flex items-center gap-2 group" aria-label="Photosphere home">
+        <svg width="26" height="26" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="18" cy="18" r="17" fill="rgba(255,255,255,0.70)" stroke="rgba(255,255,255,0.90)" stroke-width="1"/>
+          <path d="M18 1C9.6 1 2.7 7.2 1.2 15.3L18 18Z" fill="#818CF8"/>
+          <path d="M1.2 15.3C1.1 16.2 1 17.1 1 18C1 22.4 2.7 26.4 5.5 29.4L18 18Z" fill="#34D399"/>
+          <path d="M5.5 29.4C8.5 32.7 12.9 35 18 35C26.1 35 32.8 29.3 34.6 21.7L18 18Z" fill="#FB7185"/>
+          <path d="M34.6 21.7C34.9 20.5 35 19.3 35 18C35 9.2 28.5 2 18 1L18 18Z" fill="#FBBF24"/>
+          <circle cx="18" cy="18" r="6" fill="rgba(244,246,255,0.90)"/>
+        </svg>
+        <span class="font-bold text-ink-3 group-hover:text-ink transition-colors">Photosphere</span>
+      </a>
+
+      <p class="text-sm text-ink-4 text-center">
+        Released under the
+        <a href="https://github.com/ashleydavis/photosphere/blob/main/LICENSE"
+           target="_blank" rel="noopener noreferrer"
+           class="underline hover:text-ink-2 transition-colors">MIT License</a>.
+        Built by
+        <a href="https://github.com/ashleydavis"
+           target="_blank" rel="noopener noreferrer"
+           class="underline hover:text-ink-2 transition-colors">Ashley Davis</a>
+        and contributors.
+      </p>
+
+      <div class="flex items-center gap-5 text-sm text-ink-4">
+        <a href="https://github.com/ashleydavis/photosphere"
+           target="_blank" rel="noopener noreferrer"
+           class="flex items-center gap-1.5 hover:text-ink-2 transition-colors">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+          </svg>
+          GitHub
+        </a>
+        <a href="https://github.com/ashleydavis/photosphere/issues"
+           target="_blank" rel="noopener noreferrer"
+           class="hover:text-ink-2 transition-colors">Issues</a>
+        <a href="https://github.com/ashleydavis/photosphere/releases"
+           target="_blank" rel="noopener noreferrer"
+           class="hover:text-ink-2 transition-colors">Releases</a>
+      </div>
+
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

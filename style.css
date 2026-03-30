@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Barriecito:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap');
 
 /* ─── Base ──────────────────────────────────────── */
 html {
@@ -14,7 +14,7 @@ body {
 
 /* ─── Typography ────────────────────────────────── */
 h1, h2 {
-  font-family: 'Playfair Display', ui-serif, Georgia, serif;
+  font-family: 'Barriecito', ui-serif, Georgia, serif;
 }
 
 /* ─── Background orbs ───────────────────────────── */
@@ -65,9 +65,27 @@ h1, h2 {
   box-shadow: 0 2px 16px rgba(100, 100, 160, 0.10);
 }
 
+/* ─── Logo icon with gradient ───────────────────── */
+.logo-icon {
+  display: inline-block;
+  width: 90px;
+  height: 90px;
+  background: linear-gradient(135deg, #6c25a7 0%, #FB7185 60%, #FBBF24 100%);
+  -webkit-mask-image: url(/photosphere.svg);
+          mask-image: url(/photosphere.svg);
+  -webkit-mask-size: contain;
+          mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+          mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+          mask-position: center;
+  flex-shrink: 0;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.10));
+}
+
 /* ─── Gradient text ──────────────────────────────── */
 .text-gradient {
-  background: linear-gradient(135deg, #818CF8 0%, #FB7185 55%, #FBBF24 100%);
+  background: linear-gradient(135deg, #6c25a7 0%, #FB7185 60%, #FBBF24 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -82,7 +100,7 @@ h1, h2 {
 
 /* ─── Buttons ────────────────────────────────────── */
 .btn-primary {
-  background: linear-gradient(135deg, #818CF8 0%, #FB7185 60%, #FBBF24 100%);
+  background: linear-gradient(135deg, #6c25a7 0%, #FB7185 60%, #FBBF24 100%);
   border: 1px solid rgba(255, 255, 255, 0.35);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.30),
@@ -386,61 +404,25 @@ h1, h2 {
 /* ─── Photo sphere ──────────────────────────────── */
 
 /* Perspective wrapper — gives the grid 3D depth */
-.photo-sphere-scene {
-  perspective: 900px;
-  perspective-origin: 50% 50%;
-  -webkit-mask-image: radial-gradient(circle, black 38%, rgba(0,0,0,0.6) 55%, transparent 70%);
-  mask-image: radial-gradient(circle, black 38%, rgba(0,0,0,0.6) 55%, transparent 70%);
-}
-
-/* The photo grid — 5 × 5 circles with radial sphere mask */
-.photo-sphere-grid {
-  display: grid;
-  grid-template-columns: repeat(5, 88px);
-  grid-template-rows: repeat(5, 88px);
-  gap: 8px;
-
-  /* Slight 3D tilt to add depth illusion */
-  transform: rotateY(12deg) rotateX(4deg);
-  transform-style: preserve-3d;
-
-}
-
-/* Each individual circular photo */
-.sph {
-  width: 88px;
-  height: 88px;
-  border-radius: 50%;
-  object-fit: cover;
+/* Three.js photo sphere canvas */
+#sphere-canvas {
+  width: 480px;
+  height: 480px;
   display: block;
-  box-shadow:
-    0 2px 8px rgba(60, 60, 120, 0.14),
-    0 0 0 2px rgba(255, 255, 255, 0.70);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.sph:hover {
-  transform: scale(1.10) translateZ(8px);
-  box-shadow:
-    0 8px 24px rgba(60, 60, 120, 0.22),
-    0 0 0 3px rgba(255, 255, 255, 0.95);
-  z-index: 2;
+  max-width: 100%;
 }
 
-/* Mobile: shrink via scale transform so grid stays square */
 @media (max-width: 1023px) {
-  .photo-sphere-scene {
-    transform: scale(0.72);
-    transform-origin: center center;
-  }
-  .photo-sphere-grid {
-    transform: rotateY(0deg) rotateX(0deg);
+  #sphere-canvas {
+    width: 360px;
+    height: 360px;
   }
 }
 
 @media (max-width: 640px) {
-  .photo-sphere-scene {
-    transform: scale(0.55);
-    margin: -4rem 0;   /* compensate for the scaled-down empty space */
+  #sphere-canvas {
+    width: 300px;
+    height: 300px;
   }
 }
 

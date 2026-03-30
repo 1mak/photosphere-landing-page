@@ -258,6 +258,96 @@ if (deviceTrigger && devicePopover) {
   });
 })();
 
+// ─── Floating code fragments ─────────────────────────────────────────────────
+(function () {
+  const canvas = document.getElementById('code-canvas');
+  if (!canvas) return;
+
+  const ctx = canvas.getContext('2d');
+
+  const FRAGMENTS = [
+    'git commit', 'git push', 'git clone', 'git fork',
+    'pull request', 'MIT License', 'open source', 'v0.0.7',
+    'npm install', 'git merge', '// TODO', 'import', 'export default',
+    'const', 'async/await', '{ }', '</>', '#!/bin/sh',
+    'git log', 'git diff', 'fork()', '#photosphere', '★ star',
+    'issues', 'releases', 'git stash', 'npm run dev',
+  ];
+
+  const COLORS = ['#6c25a7', '#818CF8', '#FB7185', '#FBBF24', '#34D399'];
+
+  let particles = [];
+  let w, h;
+
+  function resize() {
+    w = canvas.offsetWidth;
+    h = canvas.offsetHeight;
+    canvas.width  = w * (window.devicePixelRatio || 1);
+    canvas.height = h * (window.devicePixelRatio || 1);
+    ctx.scale(window.devicePixelRatio || 1, window.devicePixelRatio || 1);
+  }
+
+  function spawn() {
+    particles.push({
+      text:    FRAGMENTS[Math.floor(Math.random() * FRAGMENTS.length)],
+      x:       Math.random() * w,
+      y:       h + 10,
+      speed:   0.3 + Math.random() * 0.5,
+      size:    10 + Math.random() * 4,
+      opacity: 0,
+      maxOp:   0.22 + Math.random() * 0.18,
+      color:   COLORS[Math.floor(Math.random() * COLORS.length)],
+      drift:   (Math.random() - 0.5) * 0.3,
+    });
+  }
+
+  let frame = 0;
+  function animate() {
+    requestAnimationFrame(animate);
+    ctx.clearRect(0, 0, w, h);
+
+    // Spawn a new fragment every ~40 frames
+    frame++;
+    if (frame % 40 === 0) spawn();
+
+    ctx.textBaseline = 'middle';
+
+    particles = particles.filter(p => p.y > -20);
+
+    particles.forEach(p => {
+      p.y -= p.speed;
+      p.x += p.drift;
+
+      // Fade in over bottom 15%, fade out over top 20%
+      const progress = 1 - (p.y / h);
+      if (progress < 0.15) {
+        p.opacity = (progress / 0.15) * p.maxOp;
+      } else if (progress > 0.80) {
+        p.opacity = ((1 - progress) / 0.20) * p.maxOp;
+      } else {
+        p.opacity = p.maxOp;
+      }
+
+      ctx.font = `${p.size}px 'Courier New', monospace`;
+      ctx.fillStyle = p.color;
+      ctx.globalAlpha = p.opacity;
+      ctx.fillText(p.text, p.x, p.y);
+    });
+
+    ctx.globalAlpha = 1;
+  }
+
+  resize();
+  // Seed a handful of particles spread across the section height
+  for (let i = 0; i < 12; i++) {
+    spawn();
+    particles[particles.length - 1].y = Math.random() * h;
+  }
+
+  animate();
+  window.addEventListener('resize', resize);
+})();
+
 // Active nav link on scroll
 const sections = document.querySelectorAll('section[id]');
 const navLinks = document.querySelectorAll('.nav-link');

@@ -146,11 +146,25 @@ h1, h2 {
 }
 .feature-card-rose:hover { border-color: rgba(252, 165, 165, 0.50); }
 
+.feature-card-amber {
+  background: rgba(254, 243, 199, 0.48);
+  border: 1px solid rgba(251, 191, 36, 0.28);
+}
+.feature-card-amber:hover { border-color: rgba(251, 191, 36, 0.50); }
+
+.feature-card-sky {
+  background: rgba(224, 242, 254, 0.48);
+  border: 1px solid rgba(14, 165, 233, 0.28);
+}
+.feature-card-sky:hover { border-color: rgba(14, 165, 233, 0.50); }
+
 /* shared for feature cards */
 .feature-card-teal,
 .feature-card-blue,
 .feature-card-purple,
-.feature-card-rose {
+.feature-card-rose,
+.feature-card-amber,
+.feature-card-sky {
   backdrop-filter: blur(20px) saturate(160%);
   -webkit-backdrop-filter: blur(20px) saturate(160%);
   box-shadow:
@@ -161,7 +175,9 @@ h1, h2 {
 .feature-card-teal:hover,
 .feature-card-blue:hover,
 .feature-card-purple:hover,
-.feature-card-rose:hover {
+.feature-card-rose:hover,
+.feature-card-amber:hover,
+.feature-card-sky:hover {
   transform: translateY(-5px);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.95),
@@ -235,6 +251,137 @@ h1, h2 {
   border-top: 1px solid rgba(0, 0, 0, 0.05);
 }
 #mobile-menu.open { display: block; }
+
+/* ─── Merkle popover ─────────────────────────────── */
+.merkle-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font: inherit;
+  font-weight: 600;
+  color: #818CF8;
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-underline-offset: 3px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  transition: color 0.15s ease;
+}
+.merkle-trigger:hover { color: #6366F1; }
+
+/* Wrapper must be relative so popover can anchor to it */
+.merkle-trigger { position: relative; }
+
+.merkle-popover {
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%) translateY(6px);
+  width: 280px;
+  z-index: 100;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.18s ease, transform 0.18s ease;
+}
+.merkle-popover.open {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+
+.merkle-popover-inner {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid rgba(129, 140, 248, 0.25);
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.95),
+    0 8px 32px rgba(60, 60, 120, 0.14),
+    0 2px 8px rgba(60, 60, 120, 0.08);
+}
+
+/* Little arrow pointing down */
+.merkle-popover-inner::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  width: 10px;
+  height: 10px;
+  background: rgba(255, 255, 255, 0.92);
+  border-right: 1px solid rgba(129, 140, 248, 0.25);
+  border-bottom: 1px solid rgba(129, 140, 248, 0.25);
+}
+
+/* ─── Device popover ─────────────────────────────── */
+/* Anchor span — must be relative so the popover can position against it */
+.popover-anchor {
+  position: relative;
+  display: inline;
+}
+
+.device-trigger {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 3px;
+  font: inherit;
+  font-weight: 600;
+  color: #10B981;
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-underline-offset: 3px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  transition: color 0.15s ease;
+}
+.device-trigger:hover { color: #059669; }
+.device-trigger svg {
+  flex-shrink: 0;
+  position: relative;
+  top: -1px;
+}
+
+.device-popover {
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 0;
+  transform: translateY(6px);
+  width: 260px;
+  z-index: 100;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.18s ease, transform 0.18s ease;
+}
+.device-popover.open {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+.device-popover .merkle-popover-inner::after {
+  left: 24px;
+  transform: rotate(45deg);
+}
+.device-popover .merkle-popover-inner {
+  border-color: rgba(52, 211, 153, 0.25);
+}
+.device-popover .merkle-popover-inner::after {
+  border-color: rgba(52, 211, 153, 0.25);
+}
+
+/* ─── Demo frame ─────────────────────────────────── */
+.demo-frame {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.90),
+    0 24px 80px rgba(60, 60, 120, 0.12),
+    0 4px 16px rgba(60, 60, 120, 0.06);
+}
 
 /* ─── Photo sphere ──────────────────────────────── */
 

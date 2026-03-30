@@ -117,6 +117,7 @@
 
       <!-- Desktop links -->
       <div class="hidden md:flex items-center gap-8">
+        <a href="#demo"          class="nav-link text-sm font-medium text-ink-3 hover:text-ink transition-colors">Demo</a>
         <a href="#features"     class="nav-link text-sm font-medium text-ink-3 hover:text-ink transition-colors">Features</a>
         <a href="#how-it-works" class="nav-link text-sm font-medium text-ink-3 hover:text-ink transition-colors">How it works</a>
         <a href="#platforms"    class="nav-link text-sm font-medium text-ink-3 hover:text-ink transition-colors">Platforms</a>
@@ -251,9 +252,9 @@
               </svg>
               Get Started on GitHub
             </a>
-            <a href="#features"
+            <a href="#demo"
                class="btn-secondary font-semibold text-base px-7 py-3.5 rounded-full flex items-center gap-2">
-              Learn more
+              Try the demo
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                    stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="M5 12h14M12 5l7 7-7 7"/>
@@ -299,15 +300,14 @@
 
         <div class="text-center mb-16">
           <h2 class="text-4xl sm:text-5xl font-extrabold text-ink mb-4">
-            Built different.<br />
-            <span class="text-gradient">Designed for you.</span>
+            Built for Speed<br />&amp; <span class="text-gradient">Security.</span>
           </h2>
           <p class="text-xl text-ink-3 max-w-xl mx-auto">
             Everything a modern photo manager should be — with none of the surveillance.
           </p>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
 
           <!-- Local-first -->
           <article class="feature-card-teal rounded-2xl p-8">
@@ -319,7 +319,40 @@
             </div>
             <h3 class="text-xl font-bold text-ink mb-3">Local-first &amp; private</h3>
             <p class="text-ink-3 leading-relaxed text-sm">
-              Your photos never leave your device. No cloud uploads, no tracking, no subscriptions. Full data sovereignty — always.
+              Your photos <span class="popover-anchor"><button class="device-trigger" aria-expanded="false" aria-controls="device-popover">never leave your device. <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></button>
+
+                <!-- Device popover -->
+                <div id="device-popover" class="device-popover" role="tooltip" aria-hidden="true">
+                  <div class="merkle-popover-inner">
+                    <div class="flex items-center justify-between mb-3">
+                      <span class="text-xs font-semibold uppercase tracking-widest text-accent-teal">Your devices</span>
+                      <button class="device-close text-ink-4 hover:text-ink transition-colors" aria-label="Close">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                      </button>
+                    </div>
+                    <ul class="space-y-2">
+                      <li class="flex items-center gap-2.5 text-xs text-ink-2">
+                        <span class="text-base">💻</span> MacBook &amp; iMac
+                      </li>
+                      <li class="flex items-center gap-2.5 text-xs text-ink-2">
+                        <span class="text-base">🖥️</span> Windows &amp; Linux desktop
+                      </li>
+                      <li class="flex items-center gap-2.5 text-xs text-ink-2">
+                        <span class="text-base">📱</span> iPhone &amp; iPad <span class="text-ink-4">(coming soon)</span>
+                      </li>
+                      <li class="flex items-center gap-2.5 text-xs text-ink-2">
+                        <span class="text-base">🤖</span> Android <span class="text-ink-4">(coming soon)</span>
+                      </li>
+                      <li class="flex items-center gap-2.5 text-xs text-ink-2">
+                        <span class="text-base">💾</span> External drives &amp; NAS
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </span>
+            </p>
+            <p class="text-ink-3 leading-relaxed text-sm mt-2">
+              No cloud uploads, no tracking, no subscriptions. Full data sovereignty — always.
             </p>
             <div class="mt-6 w-8 h-0.5 rounded-full bg-accent-teal/50"></div>
           </article>
@@ -336,7 +369,26 @@
             </div>
             <h3 class="text-xl font-bold text-ink mb-3">Corruption-resistant</h3>
             <p class="text-ink-3 leading-relaxed text-sm">
-              Built on a Git-style immutable database with Merkle trees. File integrity detection and automatic repair keep your library safe.
+              Built on a Git-style immutable database with <button class="merkle-trigger" aria-expanded="false" aria-controls="merkle-popover">Merkle trees <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></button>. File integrity detection and automatic repair keep your library safe.
+
+              <!-- ELI5 Popover -->
+              <div id="merkle-popover" class="merkle-popover" role="tooltip" aria-hidden="true">
+                <div class="merkle-popover-inner">
+                  <div class="flex items-center justify-between mb-2.5">
+                    <span class="text-xs font-semibold uppercase tracking-widest text-accent-indigo">ELI5</span>
+                    <button class="merkle-close text-ink-4 hover:text-ink transition-colors" aria-label="Close">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                    </button>
+                  </div>
+                  <p class="font-semibold text-ink text-sm mb-2">What's a Merkle tree?</p>
+                  <p class="text-xs text-ink-3 leading-relaxed">
+                    Imagine every photo in your library gets a unique fingerprint. Then pairs of fingerprints get combined into a new fingerprint, and so on — all the way up to one single "root" fingerprint for your whole library.
+                  </p>
+                  <p class="text-xs text-ink-3 leading-relaxed mt-2">
+                    If even one photo gets corrupted, its fingerprint changes, which changes every fingerprint above it — making the problem instantly detectable. It's the same trick Git and Bitcoin use.
+                  </p>
+                </div>
+              </div>
             </p>
             <div class="mt-6 w-8 h-0.5 rounded-full bg-blue-400/50"></div>
           </article>
@@ -356,6 +408,37 @@
               Bidirectional device synchronization with optional cloud encryption. Back up on your terms — no vendor lock-in.
             </p>
             <div class="mt-6 w-8 h-0.5 rounded-full bg-accent-purple/50"></div>
+          </article>
+
+          <!-- Blazing fast scrolling -->
+          <article class="feature-card-amber rounded-2xl p-8">
+            <div class="icon-ring w-14 h-14 rounded-2xl bg-amber-50 flex items-center justify-center mb-6">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none"
+                   stroke="#F59E0B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-ink mb-3">Blazing fast scrolling</h3>
+            <p class="text-ink-3 leading-relaxed text-sm">
+              Advanced rendering tricks let you fly through thousands of photos instantly — no lag, no stutter. Perfect for large libraries with tens of thousands of shots.
+            </p>
+            <div class="mt-6 w-8 h-0.5 rounded-full bg-amber-400/50"></div>
+          </article>
+
+          <!-- Search -->
+          <article class="feature-card-sky rounded-2xl p-8">
+            <div class="icon-ring w-14 h-14 rounded-2xl bg-sky-50 flex items-center justify-center mb-6">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none"
+                   stroke="#0EA5E9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"/>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-ink mb-3">Smart search</h3>
+            <p class="text-ink-3 leading-relaxed text-sm">
+              Find any photo instantly by date or location. Whether it's a holiday from three years ago or a specific city, your library is always one search away.
+            </p>
+            <div class="mt-6 w-8 h-0.5 rounded-full bg-sky-400/50"></div>
           </article>
 
           <!-- Open source -->
@@ -380,9 +463,77 @@
 
 
     <!-- ═══════════════════════════════════════════════
+         DEMO
+    ════════════════════════════════════════════════ -->
+    <section id="demo" class="py-24 px-6 section-white">
+      <div class="max-w-6xl mx-auto">
+
+        <div class="text-center mb-12">
+          <h2 class="text-4xl sm:text-5xl font-extrabold text-ink mb-4">
+            See it <span class="text-gradient">in action</span>
+          </h2>
+          <p class="text-xl text-ink-3 max-w-xl mx-auto">
+            Browse 100,000 real photos — live in your browser. No install required.
+          </p>
+        </div>
+
+        <!-- Demo frame -->
+        <div class="demo-frame glass rounded-3xl overflow-hidden">
+          <!-- Fake browser chrome -->
+          <div class="flex items-center gap-2 px-5 py-3.5 border-b border-black/06 bg-white/60">
+            <span class="w-3 h-3 rounded-full bg-red-400/80"></span>
+            <span class="w-3 h-3 rounded-full bg-amber-400/80"></span>
+            <span class="w-3 h-3 rounded-full bg-green-400/80"></span>
+            <div class="flex-1 mx-4">
+              <div class="bg-white/80 border border-black/08 rounded-full px-4 py-1 text-xs text-ink-4 font-mono text-center max-w-sm mx-auto">
+                photosphere-100k.codecapers.com.au
+              </div>
+            </div>
+            <a href="https://photosphere-100k.codecapers.com.au/"
+               target="_blank" rel="noopener noreferrer"
+               class="text-ink-4 hover:text-ink transition-colors"
+               title="Open in new tab">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                   stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                <polyline points="15 3 21 3 21 9"/>
+                <line x1="10" y1="14" x2="21" y2="3"/>
+              </svg>
+            </a>
+          </div>
+          <iframe
+            src="https://photosphere-100k.codecapers.com.au/"
+            title="Photosphere live demo — 100k photos"
+            width="100%"
+            height="580"
+            frameborder="0"
+            loading="lazy"
+            allow="fullscreen"
+          ></iframe>
+        </div>
+
+        <!-- CTA below frame -->
+        <div class="flex justify-center mt-8">
+          <a href="https://photosphere-100k.codecapers.com.au/"
+             target="_blank" rel="noopener noreferrer"
+             class="btn-primary font-semibold text-base px-7 py-3.5 rounded-full flex items-center gap-2.5">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <polygon points="10 8 16 12 10 16 10 8" fill="currentColor" stroke="none"/>
+            </svg>
+            Open full demo
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════════════
          HOW IT WORKS
     ════════════════════════════════════════════════ -->
-    <section id="how-it-works" class="py-24 px-6 section-white">
+    <section id="how-it-works" class="py-24 px-6 section-alt">
       <div class="max-w-5xl mx-auto">
 
         <div class="text-center mb-16">
@@ -461,7 +612,7 @@
     <!-- ═══════════════════════════════════════════════
          PLATFORMS
     ════════════════════════════════════════════════ -->
-    <section id="platforms" class="py-24 px-6 section-alt">
+    <section id="platforms" class="py-24 px-6 section-white">
       <div class="max-w-5xl mx-auto">
 
         <div class="text-center mb-16">
@@ -545,7 +696,7 @@
     <!-- ═══════════════════════════════════════════════
          OPEN SOURCE CTA
     ════════════════════════════════════════════════ -->
-    <section id="open-source" class="py-28 px-6 section-white">
+    <section id="open-source" class="py-28 px-6 section-alt">
       <div class="max-w-3xl mx-auto text-center">
 
         <!-- Pastel dot row -->

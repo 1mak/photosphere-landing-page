@@ -20,7 +20,15 @@
   <meta name="twitter:title" content="Photosphere — Local-First Photo Management" />
   <meta name="twitter:description" content="Free, open-source photo management. Like Google Photos, but your photos stay on your device." />
 
-  <!-- JSON-LD Schema -->
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/photosphere.svg" type="image/svg+xml">
+  <meta name="theme-color" content="#6c25a7">
+
+
+
+    <!-- JSON-LD Schema -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -43,7 +51,7 @@
         extend: {
           colors: {
             'page':     '#F4F6FF',
-            'ink':      '#1C1E2E',
+            'ink':      '#6c25a7',
             'ink-2':    '#1F2937',
             'ink-3':    '#4B5563',
             'ink-4':    '#6B7280',
@@ -102,8 +110,8 @@
 
       <!-- Logo -->
       <a href="#" class="flex items-center gap-2.5 group" aria-label="Photosphere home">
-        <span class="logo-icon" role="img" aria-label="Photosphere logo"></span>
-        <span class="text-2xl font-bold text-ink tracking-tight">Photosphere</span>
+        <img src="/photosphere.svg" alt="Photosphere logo" class="w-20 h-20 flex-shrink-0">
+        <span class="text-4xl font-serif text-ink tracking-tight">Photosphere</span>
       </a>
 
       <!-- Desktop links -->

@@ -251,6 +251,80 @@ h1, h2 {
   font-weight: 600;
 }
 
+/* ─── Download cards ─────────────────────────────── */
+.dl-card {
+  background: rgba(255, 255, 255, 0.60);
+  border: 1.5px solid rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.9), 0 4px 16px rgba(60,60,120,0.05);
+  transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+.dl-card:hover {
+  transform: translateY(-3px);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.95), 0 12px 32px rgba(60,60,120,0.09);
+}
+.dl-card-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.80);
+  border: 1px solid rgba(0,0,0,0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #475569;
+}
+
+/* Active/highlighted card (detected OS) */
+.dl-card--active {
+  border-color: rgba(99, 102, 241, 0.45);
+  background: rgba(238, 242, 255, 0.70);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.95), 0 4px 24px rgba(99,102,241,0.12);
+}
+.dl-card--active:hover {
+  border-color: rgba(99, 102, 241, 0.65);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.95), 0 12px 32px rgba(99,102,241,0.18);
+}
+.dl-card--active .dl-card-icon {
+  background: rgba(238, 242, 255, 0.90);
+  border-color: rgba(99, 102, 241, 0.18);
+  color: #6366F1;
+}
+
+.dl-btn {
+  display: inline-block;
+  text-align: center;
+  background: #ffffff;
+  color: #374151;
+  border: 1px solid rgba(0,0,0,0.13);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.9);
+  cursor: pointer;
+}
+.dl-btn:hover {
+  background: #f8fafc;
+  border-color: rgba(0,0,0,0.20);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.10), inset 0 1px 0 rgba(255,255,255,0.9);
+  text-decoration: none;
+}
+.dl-card--active .dl-btn {
+  background: #6366F1;
+  color: #fff;
+  border-color: transparent;
+  box-shadow: 0 2px 8px rgba(99,102,241,0.35);
+}
+.dl-card--active .dl-btn:hover {
+  background: #4F46E5;
+}
+
+.dl-badge {
+  background: rgba(99, 102, 241, 0.12);
+  color: #6366F1;
+}
+.dl-card--active .dl-badge {
+  display: inline-block !important;
+}
+
 /* Storage provider chips */
 .storage-provider-chip {
   display: flex;

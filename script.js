@@ -389,6 +389,47 @@ if (deviceTrigger && devicePopover) {
   window.addEventListener('resize', resize);
 })();
 
+// ─── Download cards: OS detection + dynamic GitHub release links ─────────────
+(function () {
+  const ua = navigator.userAgent;
+  const isWindows = /Win/i.test(ua);
+  const isMac     = /Mac/i.test(ua) && !/iPhone|iPad/.test(ua);
+
+  // Highlight the card(s) that match the detected OS
+  if (isWindows) {
+    document.getElementById('dl-card-windows')?.classList.add('dl-card--active');
+  } else if (isMac) {
+    document.getElementById('dl-card-mac-arm')?.classList.add('dl-card--active');
+    document.getElementById('dl-card-mac-x64')?.classList.add('dl-card--active');
+  }
+
+  // Fetch the latest nightly release from GitHub API and wire up download links
+  fetch('https://api.github.com/repos/ashleydavis/photosphere/releases')
+    .then(r => r.json())
+    .then(releases => {
+      const nightly = releases.find(r => r.tag_name === 'nightly') || releases[0];
+      if (!nightly || !nightly.assets) return;
+
+      for (const asset of nightly.assets) {
+        const name = asset.name;
+        const url  = asset.browser_download_url;
+        if (name.endsWith('-win-x64.exe')) {
+          const el = document.getElementById('dl-link-windows');
+          if (el) el.href = url;
+        } else if (name.endsWith('-mac-arm64.dmg')) {
+          const el = document.getElementById('dl-link-mac-arm');
+          if (el) el.href = url;
+        } else if (name.endsWith('-mac-x64.dmg')) {
+          const el = document.getElementById('dl-link-mac-x64');
+          if (el) el.href = url;
+        }
+      }
+    })
+    .catch(() => {
+      // Silently fall back to the releases page URL already set in the HTML
+    });
+})();
+
 // Active nav link on scroll
 const sections = document.querySelectorAll('section[id]');
 const navLinks = document.querySelectorAll('.nav-link');

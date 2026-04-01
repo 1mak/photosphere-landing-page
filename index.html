@@ -503,70 +503,75 @@
                         </div>
                     </div>
 
-                    <!-- Distribution diagram -->
+                    <!-- Distribution diagram — constrained width so SVG curves stay proportional -->
                     <div class="storage-diagram">
-                        <!-- Source: photo library node -->
-                        <div class="storage-lib-wrap">
-                            <div class="storage-lib-node">
-                                <div class="storage-lib-grid">
-                                    <div style="background:linear-gradient(135deg,#f97316,#ec4899)"></div>
-                                    <div style="background:linear-gradient(135deg,#3b82f6,#8b5cf6)"></div>
-                                    <div style="background:linear-gradient(135deg,#10b981,#06b6d4)"></div>
-                                    <div style="background:linear-gradient(135deg,#f59e0b,#ef4444)"></div>
-                                    <div style="background:linear-gradient(135deg,#6366f1,#a855f7)"></div>
-                                    <div style="background:linear-gradient(135deg,#14b8a6,#3b82f6)"></div>
+                        <div class="storage-diagram-inner">
+
+                            <!-- Source: photo library node -->
+                            <div class="storage-lib-wrap">
+                                <div class="storage-lib-node">
+                                    <div class="storage-lib-grid">
+                                        <div class="storage-thumb" style="background-image:url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=120&h=120&fit=crop&auto=format&q=70')"></div>
+                                        <div class="storage-thumb" style="background-image:url('https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?w=120&h=120&fit=crop&auto=format&q=70')"></div>
+                                        <div class="storage-thumb" style="background-image:url('https://images.unsplash.com/photo-1501854140801-50d01698950b?w=120&h=120&fit=crop&auto=format&q=70')"></div>
+                                        <div class="storage-thumb" style="background-image:url('https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=120&h=120&fit=crop&auto=format&q=70')"></div>
+                                        <div class="storage-thumb" style="background-image:url('https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=120&h=120&fit=crop&auto=format&q=70')"></div>
+                                        <div class="storage-thumb" style="background-image:url('https://images.unsplash.com/photo-1519741497674-611481863552?w=120&h=120&fit=crop&auto=format&q=70')"></div>
+                                    </div>
+                                    <span class="storage-lib-label">Photo Library</span>
                                 </div>
-                                <span class="storage-lib-label">Photo Library</span>
                             </div>
-                        </div>
 
-                        <!-- Animated SVG connector lines -->
-                        <svg class="storage-flow-svg" viewBox="0 0 300 72" preserveAspectRatio="none" aria-hidden="true">
-                            <!-- left branch -->
-                            <path class="storage-flow-path storage-flow-path--1"
-                                  d="M 150 0 C 150 36 50 36 50 72"/>
-                            <!-- center branch -->
-                            <path class="storage-flow-path storage-flow-path--2"
-                                  d="M 150 0 L 150 72"/>
-                            <!-- right branch -->
-                            <path class="storage-flow-path storage-flow-path--3"
-                                  d="M 150 0 C 150 36 250 36 250 72"/>
-                        </svg>
+                            <!-- Animated SVG connector lines + endpoint dots -->
+                            <svg class="storage-flow-svg" viewBox="0 0 300 80" aria-hidden="true">
+                                <!-- paths -->
+                                <path class="storage-flow-path storage-flow-path--1" d="M 150 4 C 150 40 50 40 50 76"/>
+                                <path class="storage-flow-path storage-flow-path--2" d="M 150 4 L 150 76"/>
+                                <path class="storage-flow-path storage-flow-path--3" d="M 150 4 C 150 40 250 40 250 76"/>
+                                <!-- source dot -->
+                                <circle cx="150" cy="4"  r="3.5" fill="#94a3b8"/>
+                                <!-- destination dots -->
+                                <circle cx="50"  cy="76" r="3.5" fill="#FF9900"/>
+                                <circle cx="150" cy="76" r="3.5" fill="#6366F1"/>
+                                <circle cx="250" cy="76" r="3.5" fill="#10B981"/>
+                            </svg>
 
-                        <!-- Storage destinations -->
-                        <div class="storage-dest-row">
-                            <div class="storage-provider-chip">
-                                <svg width="32" height="32" viewBox="0 0 80 80" fill="none" aria-hidden="true">
-                                    <rect width="80" height="80" rx="14" fill="#FF9900" fill-opacity="0.12"/>
-                                    <path d="M54 46H52a10 10 0 10-9.8-12A8 8 0 1030 46h24z" stroke="#FF9900" stroke-width="2.5" stroke-linejoin="round" fill="none"/>
-                                    <line x1="40" y1="52" x2="40" y2="60" stroke="#FF9900" stroke-width="2.5" stroke-linecap="round"/>
-                                    <polyline points="35,57 40,62 45,57" stroke="#FF9900" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                                <span class="chip-label">Any Cloud</span>
-                                <span class="chip-sub">AWS, Backblaze,<br/>Wasabi &amp; more</span>
+                            <!-- Storage destinations -->
+                            <div class="storage-dest-row">
+                                <div class="storage-provider-chip storage-chip--amber">
+                                    <svg width="32" height="32" viewBox="0 0 80 80" fill="none" aria-hidden="true">
+                                        <rect width="80" height="80" rx="14" fill="#FF9900" fill-opacity="0.12"/>
+                                        <path d="M54 46H52a10 10 0 10-9.8-12A8 8 0 1030 46h24z" stroke="#FF9900" stroke-width="2.5" stroke-linejoin="round" fill="none"/>
+                                        <line x1="40" y1="52" x2="40" y2="60" stroke="#FF9900" stroke-width="2.5" stroke-linecap="round"/>
+                                        <polyline points="35,57 40,62 45,57" stroke="#FF9900" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    <span class="chip-label">Any Cloud</span>
+                                    <span class="chip-sub">AWS S3, Google Drive,<br/>Dropbox &amp; more</span>
+                                </div>
+                                <div class="storage-provider-chip storage-chip--indigo">
+                                    <svg width="32" height="32" viewBox="0 0 80 80" fill="none" aria-hidden="true">
+                                        <rect width="80" height="80" rx="14" fill="#6366F1" fill-opacity="0.10"/>
+                                        <rect x="16" y="22" width="48" height="36" rx="6" stroke="#6366F1" stroke-width="2.5" fill="none"/>
+                                        <circle cx="56" cy="40" r="5" stroke="#6366F1" stroke-width="2.5" fill="none"/>
+                                        <line x1="20" y1="40" x2="46" y2="40" stroke="#6366F1" stroke-width="2.5" stroke-linecap="round"/>
+                                        <line x1="20" y1="32" x2="30" y2="32" stroke="#6366F1" stroke-width="2" stroke-linecap="round"/>
+                                    </svg>
+                                    <span class="chip-label">Local Drive</span>
+                                    <span class="chip-sub">Internal or<br/>external HDD/SSD</span>
+                                </div>
+                                <div class="storage-provider-chip storage-chip--emerald">
+                                    <svg width="32" height="32" viewBox="0 0 80 80" fill="none" aria-hidden="true">
+                                        <rect width="80" height="80" rx="14" fill="#10B981" fill-opacity="0.10"/>
+                                        <rect x="22" y="16" width="36" height="48" rx="5" stroke="#10B981" stroke-width="2.5" fill="none"/>
+                                        <rect x="28" y="24" width="24" height="6" rx="2" stroke="#10B981" stroke-width="2" fill="none"/>
+                                        <rect x="28" y="36" width="24" height="6" rx="2" stroke="#10B981" stroke-width="2" fill="none"/>
+                                        <circle cx="46" cy="55" r="2.5" fill="#10B981"/>
+                                    </svg>
+                                    <span class="chip-label">NAS</span>
+                                    <span class="chip-sub">Network attached<br/>storage at home</span>
+                                </div>
                             </div>
-                            <div class="storage-provider-chip">
-                                <svg width="32" height="32" viewBox="0 0 80 80" fill="none" aria-hidden="true">
-                                    <rect width="80" height="80" rx="14" fill="#6366F1" fill-opacity="0.10"/>
-                                    <rect x="16" y="22" width="48" height="36" rx="6" stroke="#6366F1" stroke-width="2.5" fill="none"/>
-                                    <circle cx="56" cy="40" r="5" stroke="#6366F1" stroke-width="2.5" fill="none"/>
-                                    <line x1="20" y1="40" x2="46" y2="40" stroke="#6366F1" stroke-width="2.5" stroke-linecap="round"/>
-                                    <line x1="20" y1="32" x2="30" y2="32" stroke="#6366F1" stroke-width="2" stroke-linecap="round"/>
-                                </svg>
-                                <span class="chip-label">Local Drive</span>
-                                <span class="chip-sub">Internal or<br/>external HDD/SSD</span>
-                            </div>
-                            <div class="storage-provider-chip">
-                                <svg width="32" height="32" viewBox="0 0 80 80" fill="none" aria-hidden="true">
-                                    <rect width="80" height="80" rx="14" fill="#10B981" fill-opacity="0.10"/>
-                                    <rect x="22" y="16" width="36" height="48" rx="5" stroke="#10B981" stroke-width="2.5" fill="none"/>
-                                    <rect x="28" y="24" width="24" height="6" rx="2" stroke="#10B981" stroke-width="2" fill="none"/>
-                                    <rect x="28" y="36" width="24" height="6" rx="2" stroke="#10B981" stroke-width="2" fill="none"/>
-                                    <circle cx="46" cy="55" r="2.5" fill="#10B981"/>
-                                </svg>
-                                <span class="chip-label">NAS</span>
-                                <span class="chip-sub">Network attached<br/>storage at home</span>
-                            </div>
+
                         </div>
                     </div>
                 </article>

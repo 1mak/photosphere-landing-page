@@ -369,6 +369,11 @@ h1, h2 {
   border-radius: 6px;
 }
 
+.storage-thumb {
+  background-size: cover;
+  background-position: center;
+}
+
 .storage-lib-label {
   font-size: 0.75rem;
   font-weight: 600;

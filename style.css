@@ -333,6 +333,79 @@ h1, h2 {
   display: inline-block !important;
 }
 
+/* ─── Storage distribution diagram ─────────────────── */
+.storage-diagram {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.storage-lib-wrap {
+  display: flex;
+  justify-content: center;
+}
+
+.storage-lib-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.storage-lib-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+  padding: 8px;
+  background: rgba(255,255,255,0.8);
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 14px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+}
+
+.storage-lib-grid div {
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+}
+
+.storage-lib-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #475569;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.storage-flow-svg {
+  width: 100%;
+  height: 72px;
+  overflow: visible;
+}
+
+.storage-flow-path {
+  fill: none;
+  stroke: #94a3b8;
+  stroke-width: 1.5;
+  stroke-dasharray: 5 7;
+  stroke-linecap: round;
+  animation: storageDots 1.6s linear infinite;
+}
+.storage-flow-path--2 { animation-delay: 0.53s; }
+.storage-flow-path--3 { animation-delay: 1.06s; }
+
+@keyframes storageDots {
+  from { stroke-dashoffset: 36; }
+  to   { stroke-dashoffset: 0;  }
+}
+
+.storage-dest-row {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  gap: 12px;
+}
+
 /* Storage provider chips */
 .storage-provider-chip {
   display: flex;
@@ -515,7 +588,7 @@ h1, h2 {
   width: 72px;
   height: 72px;
   border-radius: 20px;
-  background: rgba(255, 255, 255, 0.85);
+  background: #FFF;
   border: 1px solid rgba(167, 139, 250, 0.20);
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.9), 0 4px 16px rgba(99,102,241,0.08);
   display: flex;
@@ -527,8 +600,6 @@ h1, h2 {
   width: 80px;
   height: 80px;
   color: #7C3AED;
-  border: 0;
-  background: none;
 }
 .sync-point {
   background: rgba(249, 246, 255, 0.60);

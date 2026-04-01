@@ -485,93 +485,95 @@
                 <!-- Your storage, your rules -->
                 <article class="feature-card-slate rounded-2xl p-8 lg:col-span-3">
                     <!-- Header -->
-                    <div class="flex items-start gap-4 mb-8">
-                        <div class="icon-ring flex-shrink-0 w-14 h-14 rounded-2xl bg-white/70 flex items-center justify-center">
-                            <svg width="26" height="26" viewBox="0 0 24 24" fill="none"
-                                 stroke="#64748B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <rect x="2" y="2" width="20" height="8" rx="2" ry="2"/>
-                                <rect x="2" y="14" width="20" height="8" rx="2" ry="2"/>
-                                <line x1="6" y1="6" x2="6.01" y2="6"/>
-                                <line x1="6" y1="18" x2="6.01" y2="18"/>
-                            </svg>
+                    <div class="sm:flex gap-3">
+                        <div class="flex items-start gap-4 mb-8">
+                            <div class="icon-ring flex-shrink-0 w-14 h-14 rounded-2xl bg-white/70 flex items-center justify-center">
+                                <svg width="26" height="26" viewBox="0 0 24 24" fill="none"
+                                     stroke="#64748B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="2" y="2" width="20" height="8" rx="2" ry="2"/>
+                                    <rect x="2" y="14" width="20" height="8" rx="2" ry="2"/>
+                                    <line x1="6" y1="6" x2="6.01" y2="6"/>
+                                    <line x1="6" y1="18" x2="6.01" y2="18"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-2xl font-serif text-ink mb-2">Your storage, your rules</h3>
+                                <p class="text-ink-3 leading-relaxed text-sm max-w-xl">
+                                    Choose any storage you trust &ndash; Photosphere encrypts everything end-to-end before it leaves your device. The key never leaves you, so no one else can access your photos.
+                                </p>
+                            </div>
                         </div>
-                        <div>
-                            <h3 class="text-2xl font-serif text-ink mb-2">Your storage, your rules</h3>
-                            <p class="text-ink-3 leading-relaxed text-sm max-w-xl">
-                                Choose any storage you trust &ndash; Photosphere encrypts everything end-to-end before it leaves your device. The key never leaves you, so no one else can access your photos.
-                            </p>
-                        </div>
-                    </div>
 
-                    <!-- Distribution diagram — constrained width so SVG curves stay proportional -->
-                    <div class="storage-diagram">
-                        <div class="storage-diagram-inner">
+                        <!-- Distribution diagram — constrained width so SVG curves stay proportional -->
+                        <div class="storage-diagram">
+                            <div class="storage-diagram-inner">
 
-                            <!-- Source: photo library node -->
-                            <div class="storage-lib-wrap">
-                                <div class="storage-lib-node">
-                                    <div class="storage-lib-grid">
-                                        <div class="storage-thumb" style="background-image:url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=120&h=120&fit=crop&auto=format&q=70')"></div>
-                                        <div class="storage-thumb" style="background-image:url('https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?w=120&h=120&fit=crop&auto=format&q=70')"></div>
-                                        <div class="storage-thumb" style="background-image:url('https://images.unsplash.com/photo-1501854140801-50d01698950b?w=120&h=120&fit=crop&auto=format&q=70')"></div>
-                                        <div class="storage-thumb" style="background-image:url('https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=120&h=120&fit=crop&auto=format&q=70')"></div>
-                                        <div class="storage-thumb" style="background-image:url('https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=120&h=120&fit=crop&auto=format&q=70')"></div>
-                                        <div class="storage-thumb" style="background-image:url('https://images.unsplash.com/photo-1519741497674-611481863552?w=120&h=120&fit=crop&auto=format&q=70')"></div>
+                                <!-- Source: photo library node -->
+                                <div class="storage-lib-wrap">
+                                    <div class="storage-lib-node">
+                                        <div class="storage-lib-grid">
+                                            <div class="storage-thumb" style="background-image:url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=120&h=120&fit=crop&auto=format&q=70')"></div>
+                                            <div class="storage-thumb" style="background-image:url('https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?w=120&h=120&fit=crop&auto=format&q=70')"></div>
+                                            <div class="storage-thumb" style="background-image:url('https://images.unsplash.com/photo-1501854140801-50d01698950b?w=120&h=120&fit=crop&auto=format&q=70')"></div>
+                                            <div class="storage-thumb" style="background-image:url('https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=120&h=120&fit=crop&auto=format&q=70')"></div>
+                                            <div class="storage-thumb" style="background-image:url('https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=120&h=120&fit=crop&auto=format&q=70')"></div>
+                                            <div class="storage-thumb" style="background-image:url('https://images.unsplash.com/photo-1519741497674-611481863552?w=120&h=120&fit=crop&auto=format&q=70')"></div>
+                                        </div>
+                                        <span class="storage-lib-label">Photo Library</span>
                                     </div>
-                                    <span class="storage-lib-label">Photo Library</span>
                                 </div>
+
+                                <!-- Animated SVG connector lines + endpoint dots -->
+                                <svg class="storage-flow-svg" viewBox="0 0 300 80" aria-hidden="true">
+                                    <!-- paths -->
+                                    <path class="storage-flow-path storage-flow-path--1" d="M 150 4 C 150 40 50 40 50 76"/>
+                                    <path class="storage-flow-path storage-flow-path--2" d="M 150 4 L 150 76"/>
+                                    <path class="storage-flow-path storage-flow-path--3" d="M 150 4 C 150 40 250 40 250 76"/>
+                                    <!-- source dot -->
+                                    <circle cx="150" cy="4"  r="3.5" fill="#94a3b8"/>
+                                    <!-- destination dots -->
+                                    <circle cx="50"  cy="76" r="3.5" fill="#FF9900"/>
+                                    <circle cx="150" cy="76" r="3.5" fill="#6366F1"/>
+                                    <circle cx="250" cy="76" r="3.5" fill="#10B981"/>
+                                </svg>
+
+                                <!-- Storage destinations -->
+                                <div class="storage-dest-row">
+                                    <div class="storage-provider-chip storage-chip--amber">
+                                        <svg width="32" height="32" viewBox="0 0 80 80" fill="none" aria-hidden="true">
+                                            <rect width="80" height="80" rx="14" fill="#FF9900" fill-opacity="0.12"/>
+                                            <path d="M54 46H52a10 10 0 10-9.8-12A8 8 0 1030 46h24z" stroke="#FF9900" stroke-width="2.5" stroke-linejoin="round" fill="none"/>
+                                            <line x1="40" y1="52" x2="40" y2="60" stroke="#FF9900" stroke-width="2.5" stroke-linecap="round"/>
+                                            <polyline points="35,57 40,62 45,57" stroke="#FF9900" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                        <span class="chip-label">Any Cloud</span>
+                                        <span class="chip-sub">AWS S3, Google Drive,<br/>Dropbox &amp; more</span>
+                                    </div>
+                                    <div class="storage-provider-chip storage-chip--indigo">
+                                        <svg width="32" height="32" viewBox="0 0 80 80" fill="none" aria-hidden="true">
+                                            <rect width="80" height="80" rx="14" fill="#6366F1" fill-opacity="0.10"/>
+                                            <rect x="16" y="22" width="48" height="36" rx="6" stroke="#6366F1" stroke-width="2.5" fill="none"/>
+                                            <circle cx="56" cy="40" r="5" stroke="#6366F1" stroke-width="2.5" fill="none"/>
+                                            <line x1="20" y1="40" x2="46" y2="40" stroke="#6366F1" stroke-width="2.5" stroke-linecap="round"/>
+                                            <line x1="20" y1="32" x2="30" y2="32" stroke="#6366F1" stroke-width="2" stroke-linecap="round"/>
+                                        </svg>
+                                        <span class="chip-label">Local Drive</span>
+                                        <span class="chip-sub">Internal or<br/>external HDD/SSD</span>
+                                    </div>
+                                    <div class="storage-provider-chip storage-chip--emerald">
+                                        <svg width="32" height="32" viewBox="0 0 80 80" fill="none" aria-hidden="true">
+                                            <rect width="80" height="80" rx="14" fill="#10B981" fill-opacity="0.10"/>
+                                            <rect x="22" y="16" width="36" height="48" rx="5" stroke="#10B981" stroke-width="2.5" fill="none"/>
+                                            <rect x="28" y="24" width="24" height="6" rx="2" stroke="#10B981" stroke-width="2" fill="none"/>
+                                            <rect x="28" y="36" width="24" height="6" rx="2" stroke="#10B981" stroke-width="2" fill="none"/>
+                                            <circle cx="46" cy="55" r="2.5" fill="#10B981"/>
+                                        </svg>
+                                        <span class="chip-label">NAS</span>
+                                        <span class="chip-sub">Network attached<br/>storage at home</span>
+                                    </div>
+                                </div>
+
                             </div>
-
-                            <!-- Animated SVG connector lines + endpoint dots -->
-                            <svg class="storage-flow-svg" viewBox="0 0 300 80" aria-hidden="true">
-                                <!-- paths -->
-                                <path class="storage-flow-path storage-flow-path--1" d="M 150 4 C 150 40 50 40 50 76"/>
-                                <path class="storage-flow-path storage-flow-path--2" d="M 150 4 L 150 76"/>
-                                <path class="storage-flow-path storage-flow-path--3" d="M 150 4 C 150 40 250 40 250 76"/>
-                                <!-- source dot -->
-                                <circle cx="150" cy="4"  r="3.5" fill="#94a3b8"/>
-                                <!-- destination dots -->
-                                <circle cx="50"  cy="76" r="3.5" fill="#FF9900"/>
-                                <circle cx="150" cy="76" r="3.5" fill="#6366F1"/>
-                                <circle cx="250" cy="76" r="3.5" fill="#10B981"/>
-                            </svg>
-
-                            <!-- Storage destinations -->
-                            <div class="storage-dest-row">
-                                <div class="storage-provider-chip storage-chip--amber">
-                                    <svg width="32" height="32" viewBox="0 0 80 80" fill="none" aria-hidden="true">
-                                        <rect width="80" height="80" rx="14" fill="#FF9900" fill-opacity="0.12"/>
-                                        <path d="M54 46H52a10 10 0 10-9.8-12A8 8 0 1030 46h24z" stroke="#FF9900" stroke-width="2.5" stroke-linejoin="round" fill="none"/>
-                                        <line x1="40" y1="52" x2="40" y2="60" stroke="#FF9900" stroke-width="2.5" stroke-linecap="round"/>
-                                        <polyline points="35,57 40,62 45,57" stroke="#FF9900" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                    <span class="chip-label">Any Cloud</span>
-                                    <span class="chip-sub">AWS S3, Google Drive,<br/>Dropbox &amp; more</span>
-                                </div>
-                                <div class="storage-provider-chip storage-chip--indigo">
-                                    <svg width="32" height="32" viewBox="0 0 80 80" fill="none" aria-hidden="true">
-                                        <rect width="80" height="80" rx="14" fill="#6366F1" fill-opacity="0.10"/>
-                                        <rect x="16" y="22" width="48" height="36" rx="6" stroke="#6366F1" stroke-width="2.5" fill="none"/>
-                                        <circle cx="56" cy="40" r="5" stroke="#6366F1" stroke-width="2.5" fill="none"/>
-                                        <line x1="20" y1="40" x2="46" y2="40" stroke="#6366F1" stroke-width="2.5" stroke-linecap="round"/>
-                                        <line x1="20" y1="32" x2="30" y2="32" stroke="#6366F1" stroke-width="2" stroke-linecap="round"/>
-                                    </svg>
-                                    <span class="chip-label">Local Drive</span>
-                                    <span class="chip-sub">Internal or<br/>external HDD/SSD</span>
-                                </div>
-                                <div class="storage-provider-chip storage-chip--emerald">
-                                    <svg width="32" height="32" viewBox="0 0 80 80" fill="none" aria-hidden="true">
-                                        <rect width="80" height="80" rx="14" fill="#10B981" fill-opacity="0.10"/>
-                                        <rect x="22" y="16" width="36" height="48" rx="5" stroke="#10B981" stroke-width="2.5" fill="none"/>
-                                        <rect x="28" y="24" width="24" height="6" rx="2" stroke="#10B981" stroke-width="2" fill="none"/>
-                                        <rect x="28" y="36" width="24" height="6" rx="2" stroke="#10B981" stroke-width="2" fill="none"/>
-                                        <circle cx="46" cy="55" r="2.5" fill="#10B981"/>
-                                    </svg>
-                                    <span class="chip-label">NAS</span>
-                                    <span class="chip-sub">Network attached<br/>storage at home</span>
-                                </div>
-                            </div>
-
                         </div>
                     </div>
                 </article>

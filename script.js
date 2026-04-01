@@ -138,12 +138,11 @@ if (deviceTrigger && devicePopover) {
   });
 }
 
-// ─── Three.js Photo Sphere ───────────────────────────────────────────────────
+// ─── Three.js Film Sphere ─────────────────────────────────────────────────────
 (function () {
   const canvas = document.getElementById('sphere-canvas');
   if (!canvas || typeof THREE === 'undefined') return;
 
-  // Photo IDs (Unsplash)
   const photoIds = [
     '1772975657496-1e7107beed75', '1774246714923-0375b6f1e0e9',
     '1506905925346-21bda4d32df4', '1465146344425-f00d5f5c8f07',
@@ -155,11 +154,6 @@ if (deviceTrigger && devicePopover) {
     '1447752875215-b2761acb3c5d', '1546069901-ba9599a7e63c',
     '1514888286974-6c03e2ca1dba', '1543466835-00a7907e9de1',
     '1531306728370-e2ebd9d7bb99', '1488426862026-3ee34a7d66df',
-    '1513635269975-59663e0ac1ad', '1529156069898-49953e39b3ac',
-    '1522202176988-66273c2fd55f', '1524863479829-916d8e77f114',
-    '1534528741775-53994a69daeb', '1500648767791-00dcc994a43e',
-    '1441974231531-c6227db76b6e', '1529626455594-4ff0802cfb7e',
-    '1504700610630-ac6aba3536d3', '1774333406492-2806c117fe59'
   ];
 
   const SIZE = canvas.offsetWidth || 480;
@@ -171,128 +165,211 @@ if (deviceTrigger && devicePopover) {
 
   const scene  = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
-  camera.position.z = 3.5;
+  camera.position.z = 3.8;
 
-  // Build circular alpha-mask texture on a small offscreen canvas
-  function makeCircleMask(res) {
-    const c = document.createElement('canvas');
-    c.width = c.height = res;
-    const ctx = c.getContext('2d');
-    const r   = res / 2;
-    const grad = ctx.createRadialGradient(r, r, r * 0.72, r, r, r);
-    grad.addColorStop(0,    'rgba(255,255,255,1)');
-    grad.addColorStop(0.82, 'rgba(255,255,255,1)');
-    grad.addColorStop(1,    'rgba(255,255,255,0)');
-    ctx.fillStyle = grad;
-    ctx.beginPath();
-    ctx.arc(r, r, r, 0, Math.PI * 2);
-    ctx.fill();
-    return new THREE.CanvasTexture(c);
-  }
-  const alphaMask = makeCircleMask(256);
+  // ── Lighting ──
+  scene.add(new THREE.AmbientLight(0xffffff, 1.4));
+  const keyLight = new THREE.DirectionalLight(0xfff5e8, 2.2);
+  keyLight.position.set(3, 4, 5);
+  scene.add(keyLight);
+  const fillLight = new THREE.DirectionalLight(0xd0e8ff, 0.9);
+  fillLight.position.set(-4, 1, 2);
+  scene.add(fillLight);
+  const rimLight = new THREE.DirectionalLight(0xffffff, 0.5);
+  rimLight.position.set(0, -3, -4);
+  scene.add(rimLight);
 
-  // Build white border ring texture
-  function makeRingTex(res) {
-    const c = document.createElement('canvas');
-    c.width = c.height = res;
-    const ctx = c.getContext('2d');
-    ctx.clearRect(0, 0, res, res);
-    const r = res / 2;
-    ctx.beginPath();
-    ctx.arc(r, r, r - 2, 0, Math.PI * 2);
-    ctx.lineWidth = Math.round(res * 0.06);
-    ctx.strokeStyle = 'rgba(255,255,255,0.85)';
-    ctx.stroke();
-    return new THREE.CanvasTexture(c);
-  }
-
-  // Fibonacci sphere distribution
-  const N      = photoIds.length;
-  const PHI    = Math.PI * (3 - Math.sqrt(5));
-  const RADIUS = 1.25;
-  const group  = new THREE.Group();
-  scene.add(group);
-
-  const loader = new THREE.TextureLoader();
-  loader.crossOrigin = 'anonymous';
-
-  const meshes = [];
-
-  photoIds.forEach((id, i) => {
-    const y     = 1 - (i / (N - 1)) * 2;
-    const rHoriz = Math.sqrt(1 - y * y);
-    const theta  = PHI * i;
-    const x = Math.cos(theta) * rHoriz;
-    const z = Math.sin(theta) * rHoriz;
-
-    const pos = new THREE.Vector3(x, y, z).multiplyScalar(RADIUS);
-
-    // Photo plane
-    const geo  = new THREE.PlaneGeometry(0.74, 0.74);
-    const mat  = new THREE.MeshBasicMaterial({
-      transparent: true,
-      depthTest:   false,
-      alphaMap:    alphaMask,
-    });
-    const mesh = new THREE.Mesh(geo, mat);
-    mesh.position.copy(pos);
-    mesh.lookAt(new THREE.Vector3(0, 0, 0));
-    mesh.rotateY(Math.PI); // face outward
-    group.add(mesh);
-    meshes.push(mesh);
-
-    // Load texture
-    loader.load(
-      `https://images.unsplash.com/photo-${id}?w=200&h=200&fit=crop&auto=format&q=70`,
-      (tex) => { mat.map = tex; mat.needsUpdate = true; }
-    );
+  // ── Central light-grey sphere ──
+  const sphereMat = new THREE.MeshStandardMaterial({
+    color:     0xf2f2f4,
+    roughness: 0.25,
+    metalness: 0.05,
   });
+  scene.add(new THREE.Mesh(new THREE.SphereGeometry(0.98, 64, 64), sphereMat));
 
-  // Mouse tilt
+  // ── masterGroup receives mouse tilt ──
+  const masterGroup = new THREE.Group();
+  scene.add(masterGroup);
+
+  // ── Film strip texture (single roll, all photos) ──
+  const N_FRAMES = photoIds.length;   // 20
+  const TEX_H    = 256;
+  const FRAME_W  = TEX_H;             // square cells, full height
+  const TEX_W    = FRAME_W * N_FRAMES;
+
+  // "Cover" draw: scale image to fill dest rect without distortion
+  function drawCover(ctx, img, dx, dy, dw, dh) {
+    const iw = img.naturalWidth  || dw;
+    const ih = img.naturalHeight || dh;
+    const scale = Math.max(dw / iw, dh / ih);
+    const sw = dw / scale;
+    const sh = dh / scale;
+    const sx = (iw - sw) / 2;
+    const sy = (ih - sh) / 2;
+    ctx.drawImage(img, sx, sy, sw, sh, dx, dy, dw, dh);
+  }
+
+  function filmRRect(ctx, x, y, w, h, r) {
+    ctx.beginPath();
+    ctx.moveTo(x + r, y);
+    ctx.arcTo(x + w, y,     x + w, y + h, r);
+    ctx.arcTo(x + w, y + h, x,     y + h, r);
+    ctx.arcTo(x,     y + h, x,     y,     r);
+    ctx.arcTo(x,     y,     x + w, y,     r);
+    ctx.closePath();
+  }
+
+  function drawFilmStrip(ctx, imgs) {
+    ctx.clearRect(0, 0, TEX_W, TEX_H);
+
+    const GAP = 10;   // px gap between photos
+    const R   = 20;   // corner radius
+
+    const fw = FRAME_W - GAP * 2;
+    const fh = TEX_H  - GAP * 2;
+
+    for (let i = 0; i < N_FRAMES; i++) {
+      const fx = i * FRAME_W + GAP;
+      const fy = GAP;
+
+      ctx.save();
+      filmRRect(ctx, fx, fy, fw, fh, R);
+      ctx.clip();
+
+      if (imgs[i] && imgs[i].complete && imgs[i].naturalWidth > 0) {
+        drawCover(ctx, imgs[i], fx, fy, fw, fh);
+      } else {
+        ctx.fillStyle = 'rgba(200,200,210,0.35)';
+        ctx.fillRect(fx, fy, fw, fh);
+      }
+      ctx.restore();
+    }
+  }
+
+  // ── Offscreen canvas + texture ──
+  const fc   = document.createElement('canvas');
+  fc.width   = TEX_W;
+  fc.height  = TEX_H;
+  const fctx = fc.getContext('2d');
+  const tex  = new THREE.CanvasTexture(fc);
+  tex.anisotropy = renderer.capabilities.getMaxAnisotropy();
+
+  const imgs = [];
+  photoIds.forEach((id) => {
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    // Request square crops so cover-scaling is trivial
+    img.src = `https://images.unsplash.com/photo-${id}?w=240&h=240&fit=crop&auto=format&q=75`;
+    img.onload = () => { drawFilmStrip(fctx, imgs); tex.needsUpdate = true; };
+    imgs.push(img);
+  });
+  drawFilmStrip(fctx, imgs); // initial placeholder draw
+
+  // ── Ring ribbon geometry (XZ plane) ──
+  // ── Helix geometry: film ribbon wound around the sphere surface ──
+  // Uses spherical coordinates so the strip stays flush with the sphere.
+  // t goes 0→1 along the helix; phi = azimuth, theta = latitude elevation.
+  // At each point the ribbon is offset ±halfWidth along the binormal
+  // (Normal × Tangent), keeping the strip tangent to the sphere.
+  function createHelixGeo(radius, nTurns, elevMax, stripWidth, segsPerTurn, uScale) {
+    const N     = Math.round(segsPerTurn * nTurns);
+    const verts = [], uvs = [], idxs = [];
+
+    for (let i = 0; i <= N; i++) {
+      const t     = i / N;
+      const phi   = t * nTurns * Math.PI * 2;
+      const theta = (t * 2 - 1) * elevMax;   // -elevMax → +elevMax
+
+      const cosT = Math.cos(theta), sinT = Math.sin(theta);
+      const cosP = Math.cos(phi),   sinP = Math.sin(phi);
+
+      // Centre point on sphere
+      const px = radius * cosT * cosP;
+      const py = radius * sinT;
+      const pz = radius * cosT * sinP;
+
+      // Outward sphere normal
+      const nx = cosT * cosP, ny = sinT, nz = cosT * sinP;
+
+      // Helix tangent (derivative w.r.t. t, unnormalised)
+      const DP = nTurns * Math.PI * 2, DT = 2 * elevMax;
+      const tx = -sinT * cosP * DT - cosT * sinP * DP;
+      const ty =  cosT * DT;
+      const tz = -sinT * sinP * DT + cosT * cosP * DP;
+      const tl = Math.sqrt(tx*tx + ty*ty + tz*tz);
+      const tax = tx/tl, tay = ty/tl, taz = tz/tl;
+
+      // Binormal = Normal × Tangent  (ribbon-width direction on sphere surface)
+      let bx = ny*taz - nz*tay;
+      let by = nz*tax - nx*taz;
+      let bz = nx*tay - ny*tax;
+      const bl = Math.sqrt(bx*bx + by*by + bz*bz);
+      bx /= bl; by /= bl; bz /= bl;
+
+      const hw = stripWidth / 2;
+      verts.push(px - bx*hw, py - by*hw, pz - bz*hw);   // edge A (world-up)
+      verts.push(px + bx*hw, py + by*hw, pz + bz*hw);   // edge B (world-down)
+      // v=1 on edge A (canvas top = sprocket top) → images upright
+      const u = t * uScale;
+      uvs.push(u, 1, u, 0);
+    }
+
+    for (let i = 0; i < N; i++) {
+      const b = i * 2;
+      idxs.push(b, b+1, b+2,  b+1, b+3, b+2);
+    }
+
+    const geo = new THREE.BufferGeometry();
+    geo.setAttribute('position', new THREE.Float32BufferAttribute(verts, 3));
+    geo.setAttribute('uv',       new THREE.Float32BufferAttribute(uvs,   2));
+    geo.setIndex(idxs);
+    geo.computeVertexNormals();
+    return geo;
+  }
+
+  // ── Film helix: 2.5 turns, covers ±55° latitude, narrow ribbon ──
+  const N_TURNS  = 2.5;
+  const ELEV_MAX = THREE.MathUtils.degToRad(55);
+  const STRIP_W  = 0.52;
+
+  // How many times the texture repeats along U so pixels appear square in world space:
+  // uScale = (arcLength / stripWidth) / (TEX_W / TEX_H)
+  const approxArcLen = N_TURNS * Math.PI * 2 * 1.04;
+  const uScale       = (approxArcLen / STRIP_W) / (TEX_W / TEX_H);
+  tex.wrapS = THREE.RepeatWrapping;
+
+  const ringMat  = new THREE.MeshBasicMaterial({ map: tex, side: THREE.DoubleSide, transparent: true });
+  const ringMesh = new THREE.Mesh(createHelixGeo(1.04, N_TURNS, ELEV_MAX, STRIP_W, 80, uScale), ringMat);
+  masterGroup.add(ringMesh);
+
+  // ── Mouse tilt ──
   let targetTiltX = 0, targetTiltY = 0;
   let currentTiltX = 0, currentTiltY = 0;
   document.addEventListener('mousemove', (e) => {
     const cx = window.innerWidth  / 2;
     const cy = window.innerHeight / 2;
-    targetTiltY =  (e.clientX - cx) / cx * 0.25;
-    targetTiltX = -(e.clientY - cy) / cy * 0.18;
+    targetTiltY =  (e.clientX - cx) / cx * 0.30;
+    targetTiltX = -(e.clientY - cy) / cy * 0.20;
   });
 
-  // Animation loop
+  // ── Animation loop ──
   let autoRotY = 0;
   function animate() {
     requestAnimationFrame(animate);
 
-    autoRotY += 0.0035;
+    autoRotY += 0.0022;
 
-    currentTiltX += (targetTiltX - currentTiltX) * 0.06;
-    currentTiltY += (targetTiltY - currentTiltY) * 0.06;
+    currentTiltX += (targetTiltX - currentTiltX) * 0.05;
+    currentTiltY += (targetTiltY - currentTiltY) * 0.05;
 
-    group.rotation.y = autoRotY + currentTiltY;
-    group.rotation.x = currentTiltX;
-
-    // Depth-based opacity: front = full opacity, back hemisphere = faded
-    meshes.forEach(mesh => {
-      // World-space z of each photo after group rotation
-      const worldPos = new THREE.Vector3();
-      mesh.getWorldPosition(worldPos);
-      worldPos.project(camera);
-
-      // z in NDC: -1 = far back, +1 = front
-      // map to opacity: 0.15 (back) → 1.0 (front)
-      const t   = (worldPos.z + 1) / 2; // 0..1
-      const opacity = 0.12 + t * 0.88;
-      mesh.material.opacity = opacity;
-      if (mesh.userData.ring) {
-        mesh.userData.ring.material.opacity = opacity * 0.9;
-      }
-    });
+    masterGroup.rotation.x = currentTiltX;
+    masterGroup.rotation.y = autoRotY + currentTiltY;
 
     renderer.render(scene, camera);
   }
   animate();
 
-  // Resize handler
+  // ── Resize ──
   window.addEventListener('resize', () => {
     const s = canvas.offsetWidth;
     renderer.setSize(s, s);

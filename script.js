@@ -793,3 +793,24 @@ const observer = new IntersectionObserver((entries) => {
 }, { rootMargin: '-40% 0px -55% 0px' });
 
 sections.forEach(section => observer.observe(section));
+
+
+// ─── FAQ accordion ────────────────────────────────────────────────────────────
+document.querySelectorAll('.faq-trigger').forEach(trigger => {
+  trigger.addEventListener('click', () => {
+    const answer  = trigger.closest('.faq-item').querySelector('.faq-answer');
+    const isOpen  = trigger.getAttribute('aria-expanded') === 'true';
+
+    // Close all others
+    document.querySelectorAll('.faq-trigger').forEach(t => {
+      t.setAttribute('aria-expanded', 'false');
+      t.closest('.faq-item').querySelector('.faq-answer').classList.remove('open');
+    });
+
+    // Toggle clicked item
+    if (!isOpen) {
+      trigger.setAttribute('aria-expanded', 'true');
+      answer.classList.add('open');
+    }
+  });
+});

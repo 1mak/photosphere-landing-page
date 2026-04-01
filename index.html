@@ -502,15 +502,16 @@
                             <div class="mt-6 w-8 h-0.5 rounded-full bg-slate-400/50"></div>
                         </div>
                         <div class="flex flex-row gap-3 sm:flex-1 sm:items-center sm:justify-end">
-                            <!-- AWS S3 -->
+                            <!-- Any Cloud -->
                             <div class="storage-provider-chip">
                                 <svg width="32" height="32" viewBox="0 0 80 80" fill="none" aria-hidden="true">
                                     <rect width="80" height="80" rx="14" fill="#FF9900" fill-opacity="0.12"/>
-                                    <path d="M40 18L56 26v14L40 48 24 40V26L40 18z" stroke="#FF9900" stroke-width="2.5" stroke-linejoin="round" fill="none"/>
-                                    <path d="M40 48v14M24 26l16 14M56 26L40 40" stroke="#FF9900" stroke-width="2.5" stroke-linecap="round"/>
+                                    <path d="M54 46H52a10 10 0 10-9.8-12A8 8 0 1030 46h24z" stroke="#FF9900" stroke-width="2.5" stroke-linejoin="round" fill="none"/>
+                                    <line x1="40" y1="52" x2="40" y2="60" stroke="#FF9900" stroke-width="2.5" stroke-linecap="round"/>
+                                    <polyline points="35,57 40,62 45,57" stroke="#FF9900" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
-                                <span class="chip-label">AWS S3</span>
-                                <span class="chip-sub">Object storage<br/>in the cloud</span>
+                                <span class="chip-label">Any Cloud</span>
+                                <span class="chip-sub">AWS S3, Dropbox,<br/>Google Drive &amp; more</span>
                             </div>
                             <!-- Local hard drive -->
                             <div class="storage-provider-chip">
@@ -1184,6 +1185,107 @@
                 </a>
             </div>
 
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════
+         FAQ
+    ════════════════════════════════════════════════ -->
+    <section id="faq" class="py-24 px-6 bg-white">
+        <div class="max-w-3xl mx-auto">
+
+            <div class="text-center mb-14">
+                <h2 class="text-4xl sm:text-5xl text-ink mb-4">Frequently asked questions</h2>
+                <p class="text-lg text-ink-3">Everything you need to know about Photosphere.</p>
+            </div>
+
+            <dl class="faq-list">
+
+                <div class="faq-item">
+                    <dt>
+                        <button class="faq-trigger" aria-expanded="false">
+                            Do I really own and control my photos?
+                            <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                                <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </dt>
+                    <dd class="faq-answer">
+                        <p>Yes. Photosphere is <strong>local-first</strong> — your library lives on your own hardware. There is no Photosphere server that holds your files, no subscription that could be cancelled, and no company that can lock you out. You decide where your photos are stored and who (if anyone) has access.</p>
+                    </dd>
+                </div>
+
+                <div class="faq-item">
+                    <dt>
+                        <button class="faq-trigger" aria-expanded="false">
+                            How do I know Photosphere isn't doing something shady with my files?
+                            <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                                <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </dt>
+                    <dd class="faq-answer">
+                        <p>Photosphere is <strong>fully open source</strong>. Every line of code is publicly available on GitHub. You (or anyone you trust) can audit exactly what the application does with your files — no black boxes, no hidden telemetry.</p>
+                    </dd>
+                </div>
+
+                <div class="faq-item">
+                    <dt>
+                        <button class="faq-trigger" aria-expanded="false">
+                            What is data sovereignty and why does it matter?
+                            <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                                <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </dt>
+                    <dd class="faq-answer">
+                        <p>Data sovereignty means <strong>your files are subject to your rules, not someone else's terms of service</strong>. With Photosphere you choose the storage location — a local drive, a NAS, or a cloud provider in your preferred jurisdiction — so you remain in full control of where your data lives and who can access it.</p>
+                    </dd>
+                </div>
+
+                <div class="faq-item">
+                    <dt>
+                        <button class="faq-trigger" aria-expanded="false">
+                            What happens if my drive fails or files get corrupted?
+                            <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                                <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </dt>
+                    <dd class="faq-answer">
+                        <p>Photosphere builds a <strong>corruption-resistant database</strong> of your media files and can automatically <strong>detect and repair corrupt files</strong>. It also keeps a continuously-updated backup, so a hardware failure doesn't mean a permanent loss. Your memories stay safe even when hardware doesn't.</p>
+                    </dd>
+                </div>
+
+                <div class="faq-item">
+                    <dt>
+                        <button class="faq-trigger" aria-expanded="false">
+                            Is my data encrypted when stored in the cloud?
+                            <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                                <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </dt>
+                    <dd class="faq-answer">
+                        <p>Yes. Photosphere <strong>encrypts your files end-to-end before they leave your device</strong>. The encryption key never leaves your control, which means your cloud storage provider — whether that's AWS, Backblaze, Wasabi, or any other — cannot read your photos even if they wanted to.</p>
+                    </dd>
+                </div>
+
+                <div class="faq-item">
+                    <dt>
+                        <button class="faq-trigger" aria-expanded="false">
+                            Can I actually browse and edit my photos, or is this just a backup tool?
+                            <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                                <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </dt>
+                    <dd class="faq-answer">
+                        <p>Photosphere is a full photo management app. The <strong>desktop GUI lets you search, view, and edit your photos and videos</strong> — not just store them. Think of it as a private, self-hosted alternative to Google Photos or iCloud, with all your data staying on your own infrastructure.</p>
+                    </dd>
+                </div>
+
+            </dl>
         </div>
     </section>
 

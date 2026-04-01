@@ -539,6 +539,65 @@ h1, h2 {
 .sync-point h4 { font-size: 0.9375rem; }
 .sync-point p  { font-size: 0.8125rem; }
 
+/* ─── FAQ ────────────────────────────────────────── */
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.faq-item {
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+}
+.faq-item:first-child {
+  border-top: 1px solid rgba(0,0,0,0.08);
+}
+
+.faq-trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 20px 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1C1E2E;
+  line-height: 1.4;
+  transition: color 0.2s;
+}
+.faq-trigger:hover { color: #6c25a7; }
+
+.faq-icon {
+  flex-shrink: 0;
+  color: #6c25a7;
+  transition: transform 0.25s ease;
+}
+.faq-trigger[aria-expanded="true"] .faq-icon {
+  transform: rotate(180deg);
+}
+
+.faq-answer {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.3s ease, padding 0.3s ease;
+  padding-bottom: 0;
+}
+.faq-answer.open {
+  max-height: 300px;
+  padding-bottom: 20px;
+}
+.faq-answer p {
+  color: #4a4d6a;
+  line-height: 1.7;
+  font-size: 0.9375rem;
+}
+.faq-answer strong { color: #1C1E2E; }
+
 /* ─── Sphere security badge ─────────────────────── */
 .sphere-badge {
   position: absolute;

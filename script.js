@@ -389,6 +389,268 @@ if (deviceTrigger && devicePopover) {
   window.addEventListener('resize', resize);
 })();
 
+// ─── Sync photo animation ─────────────────────────────────────────────────────
+(function () {
+  const canvas = document.getElementById('sync-canvas');
+  if (!canvas) return;
+
+  const ctx = canvas.getContext('2d');
+  // Reuse the sphere photo IDs — pick a spread across the array
+  const SYNC_IDS = [
+    '1506905925346-21bda4d32df4','1465146344425-f00d5f5c8f07',
+    '1501854140801-50d01698950b','1472214103451-9374bd1c798e',
+    '1476514525535-07fb3b4ae5f1','1474511320723-9a56873867b5',
+    '1438761681033-6461ffad8d80','1447752875215-b2761acb3c5d',
+    '1514888286974-6c03e2ca1dba','1531306728370-e2ebd9d7bb99',
+    '1513635269975-59663e0ac1ad','1534528741775-53994a69daeb',
+  ];
+  const IMGS = SYNC_IDS.map(id => {
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.src = `https://images.unsplash.com/photo-${id}?w=80&h=80&fit=crop&auto=format&q=70`;
+    return img;
+  });
+  const FALLBACK_COLORS = [
+    '#FDA4AF','#86EFAC','#93C5FD','#FCD34D',
+    '#C4B5FD','#6EE7B7','#FCA5A5','#A5F3FC',
+  ];
+
+  let W, H, dpr;
+  let p1 = [], p2 = [];
+  let frameCount = 0;
+  let lapPos, cloudPos, destPos;
+
+  function resize() {
+    const wrap = document.getElementById('sync-diagram-wrap');
+    if (!wrap) return;
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = wrap.offsetWidth;
+    H = wrap.offsetHeight;
+    canvas.width  = W * dpr;
+    canvas.height = H * dpr;
+    canvas.style.width  = W + 'px';
+    canvas.style.height = H + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    lapPos = cloudPos = destPos = null;
+  }
+
+  function center(id) {
+    const el = document.getElementById(id);
+    const wrap = document.getElementById('sync-diagram-wrap');
+    if (!el || !wrap) return null;
+    const er = el.getBoundingClientRect();
+    const wr = wrap.getBoundingClientRect();
+    return { x: er.left + er.width/2 - wr.left, y: er.top + er.height/2 - wr.top };
+  }
+
+  function ensurePos() {
+    lapPos   = lapPos   || center('sync-device-laptop');
+    cloudPos = cloudPos || center('sync-device-cloud');
+    destPos  = destPos  || center('sync-device-dest');
+    return lapPos && cloudPos && destPos;
+  }
+
+  function ctrl(a, b) {
+    const vertical = Math.abs(b.y - a.y) > Math.abs(b.x - a.x);
+    return vertical
+      ? { x: Math.max(a.x, b.x) + 48, y: (a.y + b.y) / 2 }
+      : { x: (a.x + b.x) / 2, y: Math.min(a.y, b.y) - 48 };
+  }
+
+  function ease(t) { return t < 0.5 ? 2*t*t : -1 + (4 - 2*t)*t; }
+
+  function bezier(a, c, b, t) {
+    const m = 1 - t;
+    return { x: m*m*a.x + 2*m*t*c.x + t*t*b.x, y: m*m*a.y + 2*m*t*c.y + t*t*b.y };
+  }
+
+  function fadeAlpha(t) {
+    if (t < 0.12) return t / 0.12;
+    if (t > 0.88) return (1 - t) / 0.12;
+    return 1;
+  }
+
+  function rrect(x, y, w, h, r) {
+    ctx.beginPath();
+    ctx.moveTo(x+r, y);
+    ctx.lineTo(x+w-r, y); ctx.arcTo(x+w, y, x+w, y+r, r);
+    ctx.lineTo(x+w, y+h-r); ctx.arcTo(x+w, y+h, x+w-r, y+h, r);
+    ctx.lineTo(x+r, y+h); ctx.arcTo(x, y+h, x, y+h-r, r);
+    ctx.lineTo(x, y+r); ctx.arcTo(x, y, x+r, y, r);
+    ctx.closePath();
+  }
+
+  function drawPhoto(x, y, sz, imgIdx, fallback, alpha, angle) {
+    ctx.save();
+    ctx.globalAlpha = alpha;
+    ctx.translate(x, y);
+    ctx.rotate(angle);
+    const pad = 3, tot = sz + pad*2;
+    // Drop shadow on the white frame
+    ctx.shadowColor = 'rgba(0,0,0,0.20)';
+    ctx.shadowBlur = 8;
+    ctx.shadowOffsetY = 2;
+    ctx.fillStyle = 'rgba(255,255,255,0.97)';
+    rrect(-tot/2, -tot/2, tot, tot, 3);
+    ctx.fill();
+    ctx.shadowBlur = 0; ctx.shadowOffsetY = 0;
+    // Clip to inner photo area and draw image (or fallback colour)
+    rrect(-sz/2, -sz/2, sz, sz, 2);
+    ctx.clip();
+    const img = IMGS[imgIdx];
+    if (img && img.complete && img.naturalWidth > 0) {
+      ctx.drawImage(img, -sz/2, -sz/2, sz, sz);
+    } else {
+      ctx.fillStyle = fallback;
+      ctx.fillRect(-sz/2, -sz/2, sz, sz);
+    }
+    ctx.restore();
+  }
+
+  function spawn(arr, from, to) {
+    if (!from || !to) return;
+    const imgIdx = Math.floor(Math.random() * IMGS.length);
+    arr.push({
+      t: 0,
+      speed: 0.003 + Math.random() * 0.002,
+      imgIdx,
+      fallback: FALLBACK_COLORS[imgIdx % FALLBACK_COLORS.length],
+      sz: 24 + Math.floor(Math.random() * 10),
+      angle: (Math.random() - 0.5) * 0.45,
+      ctrl: ctrl(from, to)
+    });
+  }
+
+  // Draws a pixelated version of the photo (simulating encryption)
+  // pixelLevel 0 = clear, 1 = fully pixelated
+  function drawPixelatedPhoto(x, y, sz, imgIdx, fallback, alpha, angle, pixelLevel) {
+    const blockSize = Math.max(2, Math.round(pixelLevel * (sz / 3)));
+    if (blockSize <= 2) {
+      drawPhoto(x, y, sz, imgIdx, fallback, alpha, angle);
+      return;
+    }
+    // Render to an offscreen canvas at low resolution then scale up
+    const off = document.createElement('canvas');
+    const lowRes = Math.max(2, Math.round(sz / blockSize));
+    off.width  = lowRes;
+    off.height = lowRes;
+    const offCtx = off.getContext('2d');
+    offCtx.imageSmoothingEnabled = false;
+    const img = IMGS[imgIdx];
+    if (img && img.complete && img.naturalWidth > 0) {
+      offCtx.drawImage(img, 0, 0, lowRes, lowRes);
+    } else {
+      offCtx.fillStyle = fallback;
+      offCtx.fillRect(0, 0, lowRes, lowRes);
+    }
+    // Draw scaled-up pixelated result clipped to rounded rect
+    ctx.save();
+    ctx.globalAlpha = alpha;
+    ctx.translate(x, y);
+    ctx.rotate(angle);
+    const pad = 3, tot = sz + pad * 2;
+    ctx.shadowColor = 'rgba(0,0,0,0.20)';
+    ctx.shadowBlur = 8;
+    ctx.shadowOffsetY = 2;
+    ctx.fillStyle = 'rgba(255,255,255,0.97)';
+    rrect(-tot/2, -tot/2, tot, tot, 3);
+    ctx.fill();
+    ctx.shadowBlur = 0; ctx.shadowOffsetY = 0;
+    rrect(-sz/2, -sz/2, sz, sz, 2);
+    ctx.clip();
+    ctx.imageSmoothingEnabled = false;
+    ctx.drawImage(off, -sz/2, -sz/2, sz, sz);
+    ctx.restore();
+  }
+
+  function animateParticles(arr, from, to, encrypted) {
+    for (let i = arr.length - 1; i >= 0; i--) {
+      const p = arr[i];
+      p.t = Math.min(p.t + p.speed, 1.01);
+      if (p.t > 1) { arr.splice(i, 1); continue; }
+      const pt = bezier(from, p.ctrl, to, ease(p.t));
+      if (encrypted) {
+        // Starts fully pixelated at cloud, clears as it reaches the destination
+        const pixelLevel = Math.max(0, 1 - p.t / 0.75);
+        drawPixelatedPhoto(pt.x, pt.y, p.sz, p.imgIdx, p.fallback, fadeAlpha(p.t), p.angle, pixelLevel);
+      } else {
+        drawPhoto(pt.x, pt.y, p.sz, p.imgIdx, p.fallback, fadeAlpha(p.t), p.angle);
+      }
+    }
+  }
+
+  function drawCloudEffect() {
+    if (!cloudPos) return;
+
+    // Activity level: photos arriving (p1 near end) or departing (p2 near start)
+    let activity = 0;
+    p1.forEach(p => { if (p.t > 0.55) activity = Math.max(activity, (p.t - 0.55) / 0.45); });
+    p2.forEach(p => { if (p.t < 0.45) activity = Math.max(activity, (0.45 - p.t) / 0.45); });
+
+    const rot   = frameCount * 0.022;
+    const base  = 0.12;
+    const boost = activity * 0.40;
+
+    // Soft radial glow
+    const grd = ctx.createRadialGradient(cloudPos.x, cloudPos.y, 6, cloudPos.x, cloudPos.y, 62);
+    grd.addColorStop(0, `rgba(167,139,250,${(base + boost) * 0.9})`);
+    grd.addColorStop(1,  'rgba(167,139,250,0)');
+    ctx.beginPath();
+    ctx.arc(cloudPos.x, cloudPos.y, 62, 0, Math.PI * 2);
+    ctx.fillStyle = grd;
+    ctx.fill();
+
+    // Expanding pulse rings when photos are near
+    if (activity > 0.15) {
+      [0, 30].forEach(offset => {
+        const pulseT = ((frameCount + offset) % 60) / 60;
+        ctx.save();
+        ctx.globalAlpha = activity * (1 - pulseT) * 0.45;
+        ctx.strokeStyle = '#A78BFA';
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        ctx.arc(cloudPos.x, cloudPos.y, 42 + pulseT * 30, 0, Math.PI * 2);
+        ctx.stroke();
+        ctx.restore();
+      });
+    }
+
+    // Orbiting dots — always subtly present, brighten with activity
+    const numDots = 6;
+    const dotR    = 50;
+    for (let i = 0; i < numDots; i++) {
+      const angle = rot + (i / numDots) * Math.PI * 2;
+      const x = cloudPos.x + Math.cos(angle) * dotR;
+      const y = cloudPos.y + Math.sin(angle) * dotR;
+      const dotA = (base + activity * 0.55) * (0.45 + 0.55 * Math.sin(rot * 2.5 + i * 1.05));
+      ctx.save();
+      ctx.globalAlpha = Math.min(dotA, 1);
+      ctx.fillStyle = '#A78BFA';
+      ctx.beginPath();
+      ctx.arc(x, y, 2.5 + activity * 1.5, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+    }
+  }
+
+  function animate() {
+    requestAnimationFrame(animate);
+    if (!ensurePos()) return;
+    ctx.clearRect(0, 0, W, H);
+    frameCount++;
+    if (frameCount % 58 === 0)  spawn(p1, lapPos, cloudPos);
+    if (frameCount % 58 === 29) spawn(p2, cloudPos, destPos);
+    // Cloud effect drawn first so it sits behind the photos
+    drawCloudEffect();
+    animateParticles(p1, lapPos, cloudPos, false);  // arriving clear
+    animateParticles(p2, cloudPos, destPos, true);  // leaving encrypted → decrypts on arrival
+  }
+
+  resize();
+  window.addEventListener('resize', () => { resize(); lapPos = cloudPos = destPos = null; });
+  setTimeout(() => { ensurePos(); animate(); }, 500);
+})();
+
 // ─── Download cards: OS detection + dynamic GitHub release links ─────────────
 (function () {
   const ua = navigator.userAgent;

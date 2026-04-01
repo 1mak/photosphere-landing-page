@@ -551,10 +551,12 @@
             </div>
 
             <!-- Device diagram -->
-            <div class="sync-diagram flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-0 mb-14">
+            <div id="sync-diagram-wrap" class="relative pt-16 pb-2">
+            <canvas id="sync-canvas" class="absolute inset-0 pointer-events-none" style="z-index:0;"></canvas>
+            <div class="sync-diagram flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-0 mb-14" style="position:relative;z-index:1;">
 
                 <!-- Laptop -->
-                <div class="sync-device text-center">
+                <div id="sync-device-laptop" class="sync-device text-center">
                     <div class="sync-device-icon mx-auto mb-3">
                         <svg width="36" height="36" viewBox="0 0 24 24" fill="none"
                              stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
@@ -578,7 +580,7 @@
                 </div>
 
                 <!-- Cloud -->
-                <div class="sync-device sync-device--cloud text-center">
+                <div id="sync-device-cloud" class="sync-device sync-device--cloud text-center">
                     <div class="sync-device-icon sync-device-icon--cloud mx-auto mb-3">
                         <svg width="36" height="36" viewBox="0 0 24 24" fill="none"
                              stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
@@ -602,7 +604,7 @@
                 </div>
 
                 <!-- Desktop + Phone -->
-                <div class="sync-device text-center">
+                <div id="sync-device-dest" class="sync-device text-center">
                     <div class="flex items-end justify-center gap-3 mb-3">
                         <div class="sync-device-icon">
                             <svg width="30" height="30" viewBox="0 0 24 24" fill="none"
@@ -624,6 +626,7 @@
                 </div>
 
             </div>
+            </div><!-- /sync-diagram-wrap -->
 
             <!-- Callout points -->
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">

@@ -169,19 +169,19 @@ if (deviceTrigger && devicePopover) {
 
   // ── Lighting ──
   scene.add(new THREE.AmbientLight(0xffffff, 1.4));
-  const keyLight = new THREE.DirectionalLight(0xfff5e8, 2.2);
-  keyLight.position.set(3, 4, 5);
+  const keyLight = new THREE.AmbientLight(0x6c25a7, 1);
+  keyLight.position.set(-3, 4, 50);
   scene.add(keyLight);
-  const fillLight = new THREE.DirectionalLight(0xd0e8ff, 0.9);
+  const fillLight = new THREE.DirectionalLight(0xfb7185, 3);
   fillLight.position.set(-4, 1, 2);
   scene.add(fillLight);
-  const rimLight = new THREE.DirectionalLight(0xffffff, 0.5);
+  const rimLight = new THREE.DirectionalLight(0xfbbf24, 5);
   rimLight.position.set(0, -3, -4);
   scene.add(rimLight);
 
   // ── Central light-grey sphere ──
   const sphereMat = new THREE.MeshStandardMaterial({
-    color:     0xf2f2f4,
+    color:     0x6c25a7,
     roughness: 0.25,
     metalness: 0.05,
   });
@@ -410,7 +410,7 @@ if (deviceTrigger && devicePopover) {
       text:    FRAGMENTS[Math.floor(Math.random() * FRAGMENTS.length)],
       x:       Math.random() * w,
       y:       h + 10,
-      speed:   0.3 + Math.random() * 0.5,
+      speed:   0.1 + Math.random() * 0.5,
       size:    10 + Math.random() * 4,
       opacity: 0,
       maxOp:   0.22 + Math.random() * 0.18,
@@ -589,7 +589,7 @@ if (deviceTrigger && devicePopover) {
     const imgIdx = Math.floor(Math.random() * IMGS.length);
     arr.push({
       t: 0,
-      speed: 0.003 + Math.random() * 0.002,
+      speed: 0.0008 + Math.random() * 0.0005,
       imgIdx,
       fallback: FALLBACK_COLORS[imgIdx % FALLBACK_COLORS.length],
       sz: 24 + Math.floor(Math.random() * 10),
@@ -640,15 +640,19 @@ if (deviceTrigger && devicePopover) {
     ctx.restore();
   }
 
-  function animateParticles(arr, from, to, encrypted) {
+  function animateParticles(arr, from, to, pixelMode) {
     for (let i = arr.length - 1; i >= 0; i--) {
       const p = arr[i];
       p.t = Math.min(p.t + p.speed, 1.01);
       if (p.t > 1) { arr.splice(i, 1); continue; }
       const pt = bezier(from, p.ctrl, to, ease(p.t));
-      if (encrypted) {
-        // Starts fully pixelated at cloud, clears as it reaches the destination
-        const pixelLevel = Math.max(0, 1 - p.t / 0.75);
+      if (pixelMode === 'encrypt') {
+        // Leaves laptop clear, quickly pixelates (encrypts on departure)
+        const pixelLevel = Math.min(1, p.t / 0.20);
+        drawPixelatedPhoto(pt.x, pt.y, p.sz, p.imgIdx, p.fallback, fadeAlpha(p.t), p.angle, pixelLevel);
+      } else if (pixelMode === 'decrypt') {
+        // Starts fully pixelated, clears on arrival at destination
+        const pixelLevel = p.t < 0.70 ? 1 : (1 - p.t) / 0.30;
         drawPixelatedPhoto(pt.x, pt.y, p.sz, p.imgIdx, p.fallback, fadeAlpha(p.t), p.angle, pixelLevel);
       } else {
         drawPhoto(pt.x, pt.y, p.sz, p.imgIdx, p.fallback, fadeAlpha(p.t), p.angle);
@@ -715,12 +719,14 @@ if (deviceTrigger && devicePopover) {
     if (!ensurePos()) return;
     ctx.clearRect(0, 0, W, H);
     frameCount++;
-    if (frameCount % 58 === 0)  spawn(p1, lapPos, cloudPos);
-    if (frameCount % 58 === 29) spawn(p2, cloudPos, destPos);
+    if (frameCount % 58 === 0) spawn(p1, lapPos, cloudPos);
+    // Only start cloud → destination once the first photo is well on its way to the cloud
+    const p1Underway = p1.some(p => p.t > 0.5);
+    if (p1Underway && frameCount % 58 === 29) spawn(p2, cloudPos, destPos);
     // Cloud effect drawn first so it sits behind the photos
     drawCloudEffect();
-    animateParticles(p1, lapPos, cloudPos, false);  // arriving clear
-    animateParticles(p2, cloudPos, destPos, true);  // leaving encrypted → decrypts on arrival
+    animateParticles(p1, lapPos,   cloudPos, 'encrypt');  // pixelates on departure from laptop
+    animateParticles(p2, cloudPos, destPos,  null);       // clear — decrypted on departure from cloud
   }
 
   resize();

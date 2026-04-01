@@ -526,9 +526,9 @@ h1, h2 {
 .sync-device-icon--cloud {
   width: 80px;
   height: 80px;
-  background: rgba(237, 233, 254, 0.70);
-  border-color: rgba(167, 139, 250, 0.35);
   color: #7C3AED;
+  border: 0;
+  background: none;
 }
 .sync-point {
   background: rgba(249, 246, 255, 0.60);

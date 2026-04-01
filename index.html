@@ -737,8 +737,14 @@
     <!-- ═══════════════════════════════════════════════
          HOW IT WORKS
     ════════════════════════════════════════════════ -->
-    <section id="how-it-works" class="fade-in-section py-24 px-6 section-white">
-        <div class="max-w-5xl mx-auto">
+    <section id="how-it-works" class="fade-in-section py-24 px-6 section-download">
+        <!-- Animated background orbs -->
+        <div class="download-orb-wrap" aria-hidden="true">
+            <div class="download-orb download-orb-1"></div>
+            <div class="download-orb download-orb-2"></div>
+            <div class="download-orb download-orb-3"></div>
+        </div>
+        <div class="max-w-5xl mx-auto" style="position:relative;z-index:1;">
 
             <div class="text-center mb-16">
                 <h2 class="text-4xl sm:text-5xl text-ink mb-4">
@@ -1039,7 +1045,8 @@
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
 
                 <!-- CLI — live -->
-                <div class="glass platform-card-active rounded-2xl p-8 text-center">
+                <a href="https://github.com/ashleydavis/photosphere" target="_blank" rel="noopener noreferrer"
+                   class="glass platform-card-active rounded-2xl p-8 text-center block hover:no-underline">
                     <div class="icon-ring w-16 h-16 rounded-2xl bg-emerald-50 flex items-center justify-center mx-auto mb-5">
                         <svg width="28" height="28" viewBox="0 0 24 24" fill="none"
                              stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -1058,10 +1065,11 @@
               </svg>
               Available — v0.0.7
             </span>
-                </div>
+                </a>
 
-                <!-- Desktop — coming soon -->
-                <div class="glass rounded-2xl p-8 text-center">
+                <!-- Desktop — nightly -->
+                <a href="#how-it-works"
+                   class="glass rounded-2xl p-8 text-center block hover:no-underline">
                     <div class="icon-ring w-16 h-16 rounded-2xl bg-indigo-50 flex items-center justify-center mx-auto mb-5">
                         <svg width="28" height="28" viewBox="0 0 24 24" fill="none"
                              stroke="#818CF8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -1081,7 +1089,7 @@
               </svg>
               Available — Nightly
             </span>
-                </div>
+                </a>
 
                 <!-- Mobile — coming soon -->
                 <div class="glass rounded-2xl p-8 text-center">

@@ -453,6 +453,63 @@ h1, h2 {
   border-bottom: 1px solid rgba(200, 200, 255, 0.20);
 }
 
+/* ─── Download section (animated aurora background) ─ */
+.section-download {
+  background: #ffffff;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+.download-orb-wrap {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+.download-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+}
+.download-orb-1 {
+  width: 520px;
+  height: 520px;
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.28) 0%, transparent 70%);
+  top: -140px;
+  right: -80px;
+  animation: orbDrift1 20s ease-in-out infinite;
+}
+.download-orb-2 {
+  width: 420px;
+  height: 420px;
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.20) 0%, transparent 70%);
+  bottom: -80px;
+  left: -60px;
+  animation: orbDrift2 26s ease-in-out infinite;
+}
+.download-orb-3 {
+  width: 380px;
+  height: 380px;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.18) 0%, transparent 70%);
+  top: 40%;
+  left: 38%;
+  animation: orbDrift3 18s ease-in-out infinite;
+}
+@keyframes orbDrift1 {
+  0%, 100% { transform: translate(0, 0); }
+  33%       { transform: translate(-50px, 50px); }
+  66%       { transform: translate(35px, -40px); }
+}
+@keyframes orbDrift2 {
+  0%, 100% { transform: translate(0, 0); }
+  33%       { transform: translate(55px, -35px); }
+  66%       { transform: translate(-30px, 55px); }
+}
+@keyframes orbDrift3 {
+  0%, 100% { transform: translate(0, 0); }
+  50%       { transform: translate(-40px, -30px); }
+}
+
 /* ─── Sync section ───────────────────────────────── */
 .sync-device-icon {
   width: 72px;

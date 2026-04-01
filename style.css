@@ -539,6 +539,35 @@ h1, h2 {
 .sync-point h4 { font-size: 0.9375rem; }
 .sync-point p  { font-size: 0.8125rem; }
 
+/* ─── Sphere security badge ─────────────────────── */
+.sphere-badge {
+  position: absolute;
+  top: 18%;
+  right: 4%;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 13px 7px 10px;
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: 999px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.10), 0 1px 3px rgba(0, 0, 0, 0.06);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #6c25a7;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  pointer-events: none;
+  animation: badgeFloat 3.8s ease-in-out infinite;
+}
+
+@keyframes badgeFloat {
+  0%, 100% { transform: translateY(0px);  }
+  50%       { transform: translateY(-5px); }
+}
+
 /* ─── Under the hood cards ──────────────────────── */
 .under-hood-card {
   background: rgba(248, 250, 252, 0.80);

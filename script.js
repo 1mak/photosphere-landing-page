@@ -176,7 +176,7 @@ if (deviceTrigger && devicePopover) {
   fillLight.position.set(-4, 1, 2);
   scene.add(fillLight);
   const rimLight = new THREE.DirectionalLight(0xfbbf24, 5);
-  rimLight.position.set(0, -3, -4);
+  rimLight.position.set(100, 300, -1000);
   scene.add(rimLight);
 
   // ── Central light-grey sphere ──

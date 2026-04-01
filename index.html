@@ -269,14 +269,40 @@
                     </a>
                 </div>
 
-                <!-- Platform chips -->
+                <!-- Selling point chips -->
                 <div class="flex flex-wrap items-center justify-center lg:justify-start gap-2.5">
-                    <span class="chip flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-medium text-ink-3">
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none"
-                             stroke="#FBBF24" stroke-width="2.5" stroke-linecap="round">
-                            <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+                    <span class="chip flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-medium text-ink-2">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
                         </svg>
-                        iOS &amp; Android — Coming Soon
+                        Private by design
+                    </span>
+                    <span class="chip flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-medium text-ink-2">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#A78BFA" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="1 4 1 10 7 10"/>
+                            <polyline points="23 20 23 14 17 14"/>
+                            <path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4-4.64 4.36A9 9 0 0 1 3.51 15"/>
+                        </svg>
+                        Syncs across devices
+                    </span>
+                    <span class="chip flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-medium text-ink-2">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#0EA5E9" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/>
+                        </svg>
+                        Your storage, your choice
+                    </span>
+                    <span class="chip flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-medium text-ink-2">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                        </svg>
+                        Blazing fast
+                    </span>
+                    <span class="chip flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-medium text-ink-2">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#F87171" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="16 18 22 12 16 6"/>
+                            <polyline points="8 6 2 12 8 18"/>
+                        </svg>
+                        Open source
                     </span>
                 </div>
 
@@ -310,7 +336,7 @@
                             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
                         </svg>
                     </div>
-                    <h3 class="text-2xl font-serif text-ink mb-3">Private by design</h3>
+                    <h3 class="text-2xl font-serif text-ink mb-3">Local-first &amp; private</h3>
                     <p class="text-ink-3 leading-relaxed text-sm">
                         Sync your library freely across <span class="popover-anchor"><button class="device-trigger" aria-expanded="false"
                                                                          aria-controls="device-popover">all your devices <svg
@@ -355,7 +381,7 @@
               </span> — the path they travel is entirely up to you.
                     </p>
                     <p class="text-ink-3 leading-relaxed text-sm mt-2">
-                        No third-party servers. No hidden uploads. No tracking. You decide where your photos live and who can reach them.
+                        Your library backs up to the cloud storage of your choice — always encrypted by Photosphere before upload. No one else can read your photos.
                     </p>
                     <div class="mt-6 w-8 h-0.5 rounded-full bg-accent-teal/50"></div>
                 </article>
@@ -375,24 +401,6 @@
                         specific city, your library is always one search away.
                     </p>
                     <div class="mt-6 w-8 h-0.5 rounded-full bg-sky-400/50"></div>
-                </article>
-
-                <!-- Sync & encrypt -->
-                <article class="feature-card-purple rounded-2xl p-8">
-                    <div class="icon-ring w-14 h-14 rounded-2xl bg-white/60 flex items-center justify-center mb-6">
-                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none"
-                             stroke="#A78BFA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <polyline points="1 4 1 10 7 10"/>
-                            <polyline points="23 20 23 14 17 14"/>
-                            <path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4-4.64 4.36A9 9 0 0 1 3.51 15"/>
-                        </svg>
-                    </div>
-                    <h3 class="text-2xl font-serif text-ink mb-3">Sync &amp; encrypt</h3>
-                    <p class="text-ink-3 leading-relaxed text-sm">
-                        Bidirectional device synchronization with optional cloud encryption. Back up on your terms — no
-                        vendor lock-in.
-                    </p>
-                    <div class="mt-6 w-8 h-0.5 rounded-full bg-accent-purple/50"></div>
                 </article>
 
                 <!-- Blazing fast scrolling -->
@@ -423,44 +431,7 @@
                     </div>
                     <h3 class="text-2xl font-serif text-ink mb-3">Corruption-resistant</h3>
                     <p class="text-ink-3 leading-relaxed text-sm">
-                        Built on a Git-style immutable database with
-                        <button class="merkle-trigger" aria-expanded="false" aria-controls="merkle-popover">Merkle trees
-                            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                 stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                <circle cx="12" cy="12" r="10"/>
-                                <line x1="12" y1="8" x2="12" y2="12"/>
-                                <line x1="12" y1="16" x2="12.01" y2="16"/>
-                            </svg>
-                        </button>
-                        . File integrity detection and automatic repair keep your library safe.
-
-                        <!-- ELI5 Popover -->
-                    <div id="merkle-popover" class="merkle-popover" role="tooltip" aria-hidden="true">
-                        <div class="merkle-popover-inner">
-                            <div class="flex items-center justify-between mb-2.5">
-                                <span class="text-xs font-semibold uppercase tracking-widest text-accent-indigo">ELI5</span>
-                                <button class="merkle-close text-ink-4 hover:text-ink transition-colors"
-                                        aria-label="Close">
-                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                         stroke-width="2.5" stroke-linecap="round">
-                                        <line x1="18" y1="6" x2="6" y2="18"/>
-                                        <line x1="6" y1="6" x2="18" y2="18"/>
-                                    </svg>
-                                </button>
-                            </div>
-                            <p class="font-semibold text-ink text-sm mb-2">What's a Merkle tree?</p>
-                            <p class="text-xs text-ink-3 leading-relaxed">
-                                Imagine every photo in your library gets a unique fingerprint. Then pairs of
-                                fingerprints get combined into a new fingerprint, and so on — all the way up to one
-                                single "root" fingerprint for your whole library.
-                            </p>
-                            <p class="text-xs text-ink-3 leading-relaxed mt-2">
-                                If even one photo gets corrupted, its fingerprint changes, which changes every
-                                fingerprint above it — making the problem instantly detectable. It's the same trick Git
-                                and Bitcoin use.
-                            </p>
-                        </div>
-                    </div>
+                        Your library is protected against corruption and accidental data loss. Photosphere automatically detects damaged or missing files and repairs them, keeping every memory intact.
                     </p>
                     <div class="mt-6 w-8 h-0.5 rounded-full bg-blue-400/50"></div>
                 </article>
@@ -482,6 +453,25 @@
                     <div class="mt-6 w-8 h-0.5 rounded-full bg-accent-rose/50"></div>
                 </article>
 
+                <!-- Sharing -->
+                <article class="feature-card-fuchsia rounded-2xl p-8">
+                    <div class="icon-ring w-14 h-14 rounded-2xl bg-white/60 flex items-center justify-center mb-6">
+                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none"
+                             stroke="#D946EF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="18" cy="5" r="3"/>
+                            <circle cx="6" cy="12" r="3"/>
+                            <circle cx="18" cy="19" r="3"/>
+                            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+                            <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-serif text-ink mb-3">Share on your terms</h3>
+                    <p class="text-ink-3 leading-relaxed text-sm">
+                        Your photos stay private by default. When you're ready, choose exactly which photos or albums to share — safely and securely with family and friends, without ever losing control of the rest.
+                    </p>
+                    <div class="mt-6 w-8 h-0.5 rounded-full bg-fuchsia-400/50"></div>
+                </article>
+
                 <!-- Your storage, your rules -->
                 <article class="feature-card-slate rounded-2xl p-8 lg:col-span-3">
                     <div class="flex flex-col sm:flex-row sm:items-start gap-8">
@@ -497,8 +487,7 @@
                             </div>
                             <h3 class="text-2xl font-serif text-ink mb-3">Your storage, your rules</h3>
                             <p class="text-ink-3 leading-relaxed text-sm">
-                                Select the storage provider of your choice — Photosphere encrypts your data there so it
-                                always remains private and safe. No matter where you keep your files, the key stays with you.
+                                Choose any cloud storage provider you trust — Photosphere uses it for backup and to sync your library across devices. Before anything is uploaded, Photosphere encrypts it end-to-end. The key never leaves you, so no one else — not even the storage provider — can access your photos.
                             </p>
                             <div class="mt-6 w-8 h-0.5 rounded-full bg-slate-400/50"></div>
                         </div>
@@ -547,9 +536,140 @@
 
 
     <!-- ═══════════════════════════════════════════════
+         SYNC
+    ════════════════════════════════════════════════ -->
+    <section id="sync" class="fade-in-section py-24 px-6 section-white">
+        <div class="max-w-5xl mx-auto">
+
+            <div class="text-center mb-14">
+                <h2 class="text-4xl sm:text-5xl text-ink mb-4">
+                    One library.<br/><span class="text-gradient">Every device.</span>
+                </h2>
+                <p class="text-xl text-ink-3 max-w-xl mx-auto">
+                    Add a photo on your laptop and it's there on your desktop — your full library, always in sync, through cloud storage you choose and trust.
+                </p>
+            </div>
+
+            <!-- Device diagram -->
+            <div class="sync-diagram flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-0 mb-14">
+
+                <!-- Laptop -->
+                <div class="sync-device text-center">
+                    <div class="sync-device-icon mx-auto mb-3">
+                        <svg width="36" height="36" viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="3" width="20" height="14" rx="2"/>
+                            <line x1="2" y1="20" x2="22" y2="20"/>
+                        </svg>
+                    </div>
+                    <p class="text-sm font-semibold text-ink">Laptop</p>
+                </div>
+
+                <!-- Arrow right -->
+                <div class="sync-arrow flex-1 flex items-center justify-center">
+                    <svg width="80" height="20" viewBox="0 0 80 20" fill="none" class="hidden sm:block">
+                        <line x1="4" y1="10" x2="76" y2="10" stroke="#A78BFA" stroke-width="1.5" stroke-dasharray="4 3"/>
+                        <polyline points="70,4 76,10 70,16" stroke="#A78BFA" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                    </svg>
+                    <svg width="20" height="40" viewBox="0 0 20 40" fill="none" class="sm:hidden">
+                        <line x1="10" y1="2" x2="10" y2="38" stroke="#A78BFA" stroke-width="1.5" stroke-dasharray="4 3"/>
+                        <polyline points="4,32 10,38 16,32" stroke="#A78BFA" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                    </svg>
+                </div>
+
+                <!-- Cloud -->
+                <div class="sync-device sync-device--cloud text-center">
+                    <div class="sync-device-icon sync-device-icon--cloud mx-auto mb-3">
+                        <svg width="36" height="36" viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/>
+                        </svg>
+                    </div>
+                    <p class="text-sm font-semibold text-ink">Your cloud</p>
+                    <p class="text-xs text-ink-4 mt-0.5">encrypted</p>
+                </div>
+
+                <!-- Arrow right -->
+                <div class="sync-arrow flex-1 flex items-center justify-center">
+                    <svg width="80" height="20" viewBox="0 0 80 20" fill="none" class="hidden sm:block">
+                        <line x1="4" y1="10" x2="76" y2="10" stroke="#A78BFA" stroke-width="1.5" stroke-dasharray="4 3"/>
+                        <polyline points="70,4 76,10 70,16" stroke="#A78BFA" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                    </svg>
+                    <svg width="20" height="40" viewBox="0 0 20 40" fill="none" class="sm:hidden">
+                        <line x1="10" y1="2" x2="10" y2="38" stroke="#A78BFA" stroke-width="1.5" stroke-dasharray="4 3"/>
+                        <polyline points="4,32 10,38 16,32" stroke="#A78BFA" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                    </svg>
+                </div>
+
+                <!-- Desktop + Phone -->
+                <div class="sync-device text-center">
+                    <div class="flex items-end justify-center gap-3 mb-3">
+                        <div class="sync-device-icon">
+                            <svg width="30" height="30" viewBox="0 0 24 24" fill="none"
+                                 stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="3" width="20" height="14" rx="2"/>
+                                <line x1="8" y1="21" x2="16" y2="21"/>
+                                <line x1="12" y1="17" x2="12" y2="21"/>
+                            </svg>
+                        </div>
+                        <div class="sync-device-icon">
+                            <svg width="22" height="28" viewBox="0 0 24 24" fill="none"
+                                 stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="5" y="2" width="14" height="20" rx="2"/>
+                                <line x1="12" y1="18" x2="12.01" y2="18"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <p class="text-sm font-semibold text-ink">Desktop &amp; phone</p>
+                </div>
+
+            </div>
+
+            <!-- Callout points -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
+                <div class="sync-point rounded-2xl p-6 text-center">
+                    <div class="w-10 h-10 rounded-xl bg-purple-50 flex items-center justify-center mx-auto mb-4">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                             stroke="#A78BFA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="1 4 1 10 7 10"/>
+                            <polyline points="23 20 23 14 17 14"/>
+                            <path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4-4.64 4.36A9 9 0 0 1 3.51 15"/>
+                        </svg>
+                    </div>
+                    <h4 class="font-bold text-ink text-sm mb-1.5">Always in sync</h4>
+                    <p class="text-ink-4 text-xs leading-relaxed">Your library stays consistent across every device — no manual transfers, no duplicates.</p>
+                </div>
+                <div class="sync-point rounded-2xl p-6 text-center">
+                    <div class="w-10 h-10 rounded-xl bg-purple-50 flex items-center justify-center mx-auto mb-4">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                             stroke="#A78BFA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                        </svg>
+                    </div>
+                    <h4 class="font-bold text-ink text-sm mb-1.5">Encrypted in transit</h4>
+                    <p class="text-ink-4 text-xs leading-relaxed">Photos are encrypted by Photosphere before they reach your cloud storage — only you hold the key.</p>
+                </div>
+                <div class="sync-point rounded-2xl p-6 text-center">
+                    <div class="w-10 h-10 rounded-xl bg-purple-50 flex items-center justify-center mx-auto mb-4">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                             stroke="#A78BFA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/>
+                        </svg>
+                    </div>
+                    <h4 class="font-bold text-ink text-sm mb-1.5">Your provider, your choice</h4>
+                    <p class="text-ink-4 text-xs leading-relaxed">Use any cloud storage you already trust. Switch providers any time — no lock-in.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════════════
          DEMO
     ════════════════════════════════════════════════ -->
-    <section id="demo" class="fade-in-section py-24 px-6 section-white">
+    <section id="demo" class="fade-in-section py-24 px-6 section-alt">
         <div class="max-w-6xl mx-auto">
 
             <div class="text-center mb-12">
@@ -617,7 +737,7 @@
     <!-- ═══════════════════════════════════════════════
          HOW IT WORKS
     ════════════════════════════════════════════════ -->
-    <section id="how-it-works" class="fade-in-section py-24 px-6 section-alt">
+    <section id="how-it-works" class="fade-in-section py-24 px-6 section-white">
         <div class="max-w-5xl mx-auto">
 
             <div class="text-center mb-16">
@@ -831,6 +951,74 @@
                 </a>
             </div>
 
+            <!-- Divider -->
+            <div class="relative my-16 flex items-center gap-4">
+                <div class="flex-1 h-px bg-indigo-300/20"></div>
+                <span class="dev-badge inline-flex items-center gap-1.5 text-xs font-semibold px-3.5 py-1.5 rounded-full whitespace-nowrap">
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                         stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <circle cx="12" cy="12" r="3"/>
+                        <path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/>
+                    </svg>
+                    Under the hood
+                </span>
+                <div class="flex-1 h-px bg-indigo-300/20"></div>
+            </div>
+
+            <!-- Technical deep-dive cards -->
+            <p class="text-center text-ink-3 text-base max-w-xl mx-auto mb-10">
+                Photosphere is built on a small set of powerful ideas borrowed from distributed version control — designed for large, immutable binary files.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+                <!-- Git for photos -->
+                <div class="under-hood-card rounded-2xl p-7">
+                    <div class="icon-ring w-12 h-12 rounded-xl bg-indigo-50 flex items-center justify-center mb-5">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
+                             stroke="#6366F1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><circle cx="18" cy="6" r="3"/>
+                            <path d="M18 9v1a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V9"/>
+                            <line x1="12" y1="12" x2="12" y2="15"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-ink mb-2">Git for photos</h3>
+                    <p class="text-ink-3 text-sm leading-relaxed">
+                        Photosphere's database is modelled after Git — a content-addressed, append-only structure built for large immutable binary files. Every version of every photo is tracked without duplication, and nothing is ever silently overwritten.
+                    </p>
+                </div>
+
+                <!-- Merkle tree integrity -->
+                <div class="under-hood-card rounded-2xl p-7">
+                    <div class="icon-ring w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center mb-5">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
+                             stroke="#60A5FA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-ink mb-2">Merkle tree integrity</h3>
+                    <p class="text-ink-3 text-sm leading-relaxed">
+                        Every photo gets a unique cryptographic fingerprint. These are combined up into a single root hash for the whole library — the same technique used by Git and Bitcoin. If even one file changes unexpectedly, the discrepancy is detected instantly.
+                    </p>
+                </div>
+
+                <!-- CLI & scripting -->
+                <div class="under-hood-card rounded-2xl p-7">
+                    <div class="icon-ring w-12 h-12 rounded-xl bg-emerald-50 flex items-center justify-center mb-5">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
+                             stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="4 17 10 11 4 5"/>
+                            <line x1="12" y1="19" x2="20" y2="19"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-ink mb-2">CLI &amp; scripting</h3>
+                    <p class="text-ink-3 text-sm leading-relaxed">
+                        The GUI is built on top of a fully capable CLI. Script imports, exports, integrity checks, and database operations directly — ideal for automation, backups, and integrating Photosphere into your own tooling.
+                    </p>
+                </div>
+
+            </div>
+
         </div>
     </section>
 
@@ -845,7 +1033,7 @@
                 <h2 class="text-4xl sm:text-5xl text-ink mb-4">
                     Available <span class="text-gradient">everywhere</span>
                 </h2>
-                <p class="text-xl text-ink-3">Starting with CLI — desktop and mobile are on the way.</p>
+                <p class="text-xl text-ink-3">Windows &amp; macOS apps available — mobile is on the way.</p>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
@@ -885,13 +1073,13 @@
                     <h3 class="text-xl font-bold text-ink mb-2">Desktop App</h3>
                     <p class="text-ink-3 text-sm mb-5">Native app for Windows, macOS, and Linux — powered by
                         Electron.</p>
-                    <span class="inline-flex items-center gap-1.5 bg-amber-50 border border-amber-200
-                         text-amber-700 text-sm font-semibold px-4 py-1.5 rounded-full">
+                    <span class="inline-flex items-center gap-1.5 bg-emerald-50 border border-emerald-200
+                         text-emerald-700 text-sm font-semibold px-4 py-1.5 rounded-full">
               <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                   stroke-width="2.5" stroke-linecap="round">
-                <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+                   stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"/>
               </svg>
-              Coming Soon
+              Available — Nightly
             </span>
                 </div>
 
